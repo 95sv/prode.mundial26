@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prode Mundial 2026</title>
+  <meta name="description" content="Prode Mundial 2026: fixture, predicciones públicas y ranking." />
+  <meta property="og:title" content="Prode Mundial 2026" />
+  <meta property="og:description" content="Participá del prode, revisá el fixture y seguí el ranking." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">🏆 Mundial de Fútbol 2026</p>
+        <h1 id="app-title">Prode Mundial 2026</h1>
+        <p id="app-subtitle" class="hero__subtitle">Fixture, predicciones públicas y ranking en vivo</p>
+        <div class="hero__actions">
+          <a id="form-link" class="button button--primary" href="#" target="_blank" rel="noopener">Completar mi predicción</a>
+          <a id="whatsapp-link" class="button button--ghost hidden" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <aside class="status-card" aria-label="Estado del prode">
+        <span class="status-card__label">Cierre de carga</span>
+        <strong id="deadline-text">Configurá la fecha de cierre</strong>
+        <span id="countdown-text" class="status-card__meta">-</span>
+      </aside>
+    </header>
+
+    <nav class="tabs" aria-label="Secciones del prode">
+      <button class="tab is-active" data-view="inicio">Inicio</button>
+      <button class="tab" data-view="fixture">Fixture</button>
+      <button class="tab" data-view="ranking">Ranking</button>
+      <button class="tab" data-view="predicciones">Predicciones</button>
+      <button class="tab" data-view="reglas">Reglas</button>
+    </nav>
+
+    <main>
+      <section id="view-inicio" class="view is-active">
+        <div class="grid grid--stats">
+          <article class="metric-card"><span>Partidos cargados</span><strong id="stat-matches">72</strong></article>
+          <article class="metric-card"><span>Participantes</span><strong id="stat-players">0</strong></article>
+          <article class="metric-card"><span>Predicciones visibles</span><strong id="stat-predictions">0</strong></article>
+        </div>
+        <section class="panel intro-panel">
+          <div>
+            <h2>Cómo participar</h2>
+            <p>Entrá al link de carga, completá tus resultados de fase de grupos y enviá tu prode antes del cierre. Después se habilitan las predicciones públicas para que todos puedan ver qué puso cada participante.</p>
+          </div>
+          <ol class="steps">
+            <li><span>1</span> Cargá tu predicción</li>
+            <li><span>2</span> Esperá el cierre</li>
+            <li><span>3</span> Seguí ranking y resultados</li>
+          </ol>
+        </section>
+      </section>
+
+      <section id="view-fixture" class="view">
+        <div class="toolbar">
+          <label>Grupo<select id="group-filter"></select></label>
+          <label>Buscar equipo o ciudad<input id="fixture-search" type="search" placeholder="Argentina, México, Dallas..." /></label>
+        </div>
+        <div id="fixture-list" class="match-grid"></div>
+      </section>
+
+      <section id="view-ranking" class="view">
+        <section class="panel section-heading">
+          <div><h2>Ranking general</h2><p>Si no configurás una hoja de ranking, la página calcula puntos con predicciones públicas y resultados reales de la hoja de partidos.</p></div>
+          <button id="refresh-ranking" class="button button--small">Actualizar datos</button>
+        </section>
+        <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Participante</th><th>Partidos</th><th>Extras</th><th>Total</th></tr></thead><tbody id="ranking-body"></tbody></table></div>
+        <p id="ranking-empty" class="empty-state">Todavía no hay ranking público configurado.</p>
+      </section>
+
+      <section id="view-predicciones" class="view">
+        <section class="panel section-heading"><div><h2>Predicciones públicas</h2><p id="predictions-visibility-note">Las predicciones se muestran después del cierre para evitar copias.</p></div></section>
+        <div class="toolbar toolbar--predictions">
+          <label>Participante<select id="player-filter"></select></label>
+          <label>Grupo<select id="prediction-group-filter"></select></label>
+          <label>Buscar<input id="prediction-search" type="search" placeholder="Equipo, partido o participante..." /></label>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Participante</th><th>Grupo</th><th>Partido</th><th>Predicción</th><th>Resultado</th><th>Puntos</th></tr></thead><tbody id="predictions-body"></tbody></table></div>
+        <p id="predictions-empty" class="empty-state">Todavía no hay predicciones públicas configuradas.</p>
+      </section>
+
+      <section id="view-reglas" class="view">
+        <div class="rules-grid">
+          <article class="panel"><h2>Reglas de puntaje</h2><ul class="rule-list"><li><strong id="score-exact">3</strong> puntos por resultado exacto.</li><li><strong id="score-outcome">1</strong> punto por acertar ganador o empate.</li><li><strong id="score-miss">0</strong> puntos si no acierta.</li></ul></article>
+          <article class="panel"><h2>Extras sugeridos</h2><ul class="rule-list"><li>Campeón: <strong id="score-champion">10</strong> puntos.</li><li>Subcampeón: <strong id="score-runner-up">6</strong> puntos.</li><li>Goleador: <strong id="score-top-scorer">6</strong> puntos.</li><li>Equipo revelación: <strong id="score-revelation">4</strong> puntos.</li></ul></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer"><span>Prode organizado por <strong id="organizer-name">Santi</strong></span><span>Datos desde Google Sheets</span></footer>
+  <script src="config.js"></script>
+  <script src="data/fixture.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
