@@ -1,6 +1,6 @@
 // Configuración principal del Prode Mundial 2026.
 // Pegá acá tus links de carga y tus CSV publicados de Google Sheets.
-
+const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbw07VoXUkmhUG13IK0VCIPdJRQ34uivBtVUGkSZpO-Q9i429_YQzPLe9dECkQvhAKn-zg/exec"
 window.PRODE_CONFIG = {
   title: "Prode Mundial 2026",
   subtitle: "Fixture, predicciones públicas y ranking en vivo",
@@ -10,7 +10,7 @@ window.PRODE_CONFIG = {
   deadlineIso: "2026-06-11T11:30:00-03:00",
 
   // Link de carga para participantes. Recomendado: Google Form conectado a Google Sheets.
-  predictionFormUrl: "https://docs.google.com/spreadsheets/d/1N577OoDfCjiLG7hSqUut-u0KbNZCU7OJPOZ8Nd0Q1JI/copy",
+  predictionFormUrl: "https://docs.google.com/spreadsheets/d/1e1yr8AM2vNCozJMkyKwsq7dknYoPcCWmEnFwmn1zZRA/copy",
 
 
   // Opcional: link a grupo/contacto de WhatsApp.
@@ -27,8 +27,8 @@ window.PRODE_CONFIG = {
   },
 
   sheets: {
-    partidosCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8X_vFY_XHugN0h8LxHy_JU-V0bf_qrLLGzh4f8s1uZ8IxYqzMgGle-tOj9S_F22uC7UfL17SlDuSi/pub?gid=1000094583&single=true&output=csv",
-    prediccionesCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8X_vFY_XHugN0h8LxHy_JU-V0bf_qrLLGzh4f8s1uZ8IxYqzMgGle-tOj9S_F22uC7UfL17SlDuSi/pub?gid=1377167273&single=true&output=csv",
+    partidosCsvUrl: `${PRODE_API_URL}?view=partidos`,
+    prediccionesCsvUrl: `${PRODE_API_URL}?view=predicciones`,
     rankingCsvUrl: "",
     extrasCsvUrl: ""
   },
