@@ -10,16 +10,21 @@
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="page-shell">
     <header class="hero">
       <div class="hero__content">
-        <p class="eyebrow">🏆 Mundial de Fútbol 2026</p>
-        <h1 id="app-title">Prode Mundial 2026</h1>
-        <p id="app-subtitle" class="hero__subtitle">Fixture, predicciones públicas y ranking en vivo</p>
+        <p class="eyebrow">We Are 26 · FIFA World Cup</p>
+        <h1 id="app-title">Prode <span class="accent">Mundial 26</span></h1>
+        <p id="app-subtitle" class="hero__subtitle">Fixture, predicciones públicas y ranking en vivo del Mundial Canadá · México · Estados Unidos 2026.</p>
+        <div class="hero__hosts" aria-label="Países anfitriones">
+          <span class="host-chip host-chip--can">🇨🇦 Canadá</span>
+          <span class="host-chip host-chip--mex">🇲🇽 México</span>
+          <span class="host-chip host-chip--usa">🇺🇸 Estados Unidos</span>
+        </div>
         <div class="hero__actions">
           <a id="form-link" class="button button--primary" href="#" target="_blank" rel="noopener">Completar mi predicción</a>
           <a id="whatsapp-link" class="button button--ghost hidden" href="#" target="_blank" rel="noopener">WhatsApp</a>
@@ -62,7 +67,6 @@
         </section>
       </section>
 
-
       <section id="view-cargar" class="view">
         <section id="cargar-prode" class="panel section-heading prediction-heading">
           <div>
@@ -71,11 +75,9 @@
           </div>
           <span class="submission-badge" id="submission-mode-badge">Carga desde la web</span>
         </section>
-
         <form id="prediction-form" class="prediction-form" method="post" target="prediction-submit-frame">
           <input type="hidden" name="tipo" value="prediccion" />
           <input type="hidden" name="version" value="resultado-simple-v1" />
-
           <section class="form-panel">
             <div class="form-grid">
               <label class="form-label">Nombre o apodo
@@ -87,14 +89,11 @@
             </div>
             <p class="form-help">El nombre/apodo es el que va a aparecer en la tabla pública después del cierre.</p>
           </section>
-
           <div class="form-tools">
             <label>Filtrar grupo<select id="prediction-form-group-filter"></select></label>
             <label>Buscar partido<input id="prediction-form-search" type="search" placeholder="Argentina, México, Grupo A..." /></label>
           </div>
-
           <div id="prediction-form-list" class="prediction-form-list"></div>
-
           <section class="form-submit-bar">
             <div>
               <strong id="prediction-progress">0 de 72 partidos seleccionados</strong>
@@ -103,7 +102,6 @@
             <button id="prediction-submit-button" class="button button--primary" type="submit">Enviar predicción</button>
           </section>
         </form>
-
         <iframe id="prediction-submit-frame" name="prediction-submit-frame" class="hidden" title="Estado de envío"></iframe>
       </section>
 
@@ -163,6 +161,7 @@
   <script src="config.js"></script>
   <script src="data/fixture.js"></script>
   <script src="data/eliminatorias.js"></script>
+  <script src="data/banderas.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

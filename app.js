@@ -28,6 +28,36 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+// Devuelve la bandera emoji para una selección dada.
+function flagFor(team) {
+  const raw = String(team || "").trim();
+  if (!raw) return "🏳️";
+  const map = window.PRODE_BANDERAS || {};
+  const alias = window.PRODE_BANDERAS_ALIAS || {};
+  if (map[raw]) return map[raw];
+  if (alias[raw] && map[alias[raw]]) return map[alias[raw]];
+  // Placeholders de eliminatorias: "Ganador R32-01", "Clasificado 5", etc.
+  if (/^(ganador|perdedor|clasificado)\b/i.test(raw)) return "🎯";
+  return "🏳️";
+}
+
+// Bloque visual de un equipo (bandera + nombre). `side` = "a" o "b".
+function teamBlock(team, side = "a") {
+  const flag = flagFor(team);
+  const sideClass = side === "b" ? " team--b" : "";
+  return `<span class="team${sideClass}"><span class="team__flag" aria-hidden="true">${flag}</span><span class="team__name">${escapeHtml(team)}</span></span>`;
+}
+
+// Pinta de dorado la última palabra del título (estilo branding FWC26).
+function applyTitleAccent(text) {
+  const value = String(text || "").trim();
+  if (!value) return "";
+  const words = value.split(/\s+/);
+  if (words.length === 1) return escapeHtml(value);
+  const last = words.pop();
+  return `${escapeHtml(words.join(" "))} <span class="accent">${escapeHtml(last)}</span>`;
+}
+
 function normalizeOutcome(value) {
   const text = String(value ?? "").trim().toUpperCase();
   if (["A", "LOCAL", "EQUIPO_A", "1"].includes(text)) return "A";
@@ -99,30 +129,30 @@ function normalizeMatch(row) {
   return {
     id: row.id || row.id_partido || row.partido_id || "",
     fase: row.fase || "Grupos",
-    grupo: String(row.grupo || "").replace("Grupo ", ""),
-    fecha_num: cleanNumber(row.fecha_num) || "",
+    grupo: row.grupo || "",
+    fecha_num: row.fecha_num || "",
     fecha: row.fecha || "",
     fecha_texto: row.fecha_texto || "",
     hora: row.hora || "",
     equipo_a: row.equipo_a || row.local || row.equipo_local || "",
     equipo_b: row.equipo_b || row.visitante || row.equipo_visitante || "",
     ciudad: row.ciudad || row.sede || "",
-    goles_a_real: cleanNumber(row.goles_a_real ?? row.real_a),
-    goles_b_real: cleanNumber(row.goles_b_real ?? row.real_b)
+    goles_a_real: cleanNumber(row.goles_a_real ?? row.goles_local),
+    goles_b_real: cleanNumber(row.goles_b_real ?? row.goles_visitante)
   };
 }
 
 function normalizeKnockout(row) {
   return {
-    id: row.id || row.id_partido || row.partido_id || "",
-    fase: row.fase || "Eliminación directa",
+    id: row.id || row.id_partido || "",
+    fase: row.fase || "",
     fecha: row.fecha || row.fecha_texto || "",
     hora: row.hora || "",
     equipo_a: row.equipo_a || row.local || row.equipo_local || "",
     equipo_b: row.equipo_b || row.visitante || row.equipo_visitante || "",
     ciudad: row.ciudad || row.sede || "",
-    goles_a_real: cleanNumber(row.goles_a_real ?? row.real_a),
-    goles_b_real: cleanNumber(row.goles_b_real ?? row.real_b)
+    goles_a_real: cleanNumber(row.goles_a_real ?? row.goles_local),
+    goles_b_real: cleanNumber(row.goles_b_real ?? row.goles_visitante)
   };
 }
 
@@ -130,17 +160,17 @@ function normalizePrediction(row) {
   return {
     participante: row.participante || row.apodo || row.nombre || "",
     id_partido: row.id_partido || row.id || row.partido_id || "",
-    prediccion: normalizeOutcome(row.prediccion ?? row.resultado ?? row.outcome ?? row.pronostico),
-    pred_a: cleanNumber(row.pred_a ?? row.goles_a ?? row.prediccion_a),
-    pred_b: cleanNumber(row.pred_b ?? row.goles_b ?? row.prediccion_b)
+    prediccion: normalizeOutcome(row.prediccion || row.resultado || row.pronostico || ""),
+    pred_a: cleanNumber(row.pred_a ?? row.goles_a ?? row.pron_a),
+    pred_b: cleanNumber(row.pred_b ?? row.goles_b ?? row.pron_b)
   };
 }
 
-function dedupePredictions(items) {
+function dedupePredictions(rows) {
   const map = new Map();
-  items.forEach((item) => {
-    const key = `${item.participante}::${item.id_partido}`;
-    map.set(key, item);
+  rows.forEach((row) => {
+    const key = `${row.participante}::${row.id_partido}`;
+    map.set(key, row);
   });
   return Array.from(map.values());
 }
@@ -187,12 +217,9 @@ function getPredictionPoints(prediction) {
   const realOutcome = getOutcome(realA, realB);
   const predictedOutcome = getPredictionOutcome(prediction);
   if (!predictedOutcome) return "";
-
-  // Compatibilidad con predicciones antiguas por goles exactos.
   if (!prediction.prediccion && prediction.pred_a !== "" && prediction.pred_b !== "") {
     if (Number(realA) === Number(prediction.pred_a) && Number(realB) === Number(prediction.pred_b)) return config.scoring?.exactScore ?? 3;
   }
-
   return realOutcome === predictedOutcome ? (config.scoring?.outcome ?? 1) : (config.scoring?.miss ?? 0);
 }
 
@@ -244,7 +271,7 @@ function predictionsAreVisible() {
 }
 
 function setupStaticText() {
-  $("#app-title").textContent = config.title || "Prode Mundial 2026";
+  $("#app-title").innerHTML = applyTitleAccent(config.title || "Prode Mundial 2026");
   $("#app-subtitle").textContent = config.subtitle || "Fixture, predicciones públicas y ranking";
   $("#organizer-name").textContent = config.organizerName || "Santi";
   const formLink = $("#form-link");
@@ -340,7 +367,7 @@ function renderFixture() {
   });
   $("#fixture-list").innerHTML = filtered.map((match) => {
     const realScore = match.goles_a_real !== "" && match.goles_b_real !== "" ? `${match.goles_a_real} - ${match.goles_b_real}` : "vs";
-    return `<article class="match-card"><div class="match-meta"><span class="group-pill">Grupo ${match.grupo}</span><span>${formatDate(match.fecha)} · ${match.hora}</span></div><div class="match-teams"><span>${match.equipo_a}</span><span class="score-box">${realScore}</span><span class="team-b">${match.equipo_b}</span></div><p class="match-location">📍 ${match.ciudad}</p></article>`;
+    return `<article class="match-card"><div class="match-meta"><span class="group-pill">Grupo ${match.grupo}</span><span>${formatDate(match.fecha)} · ${match.hora}</span></div><div class="match-teams">${teamBlock(match.equipo_a, "a")}<span class="score-box">${realScore}</span>${teamBlock(match.equipo_b, "b")}</div><p class="match-location">📍 ${escapeHtml(match.ciudad)}</p></article>`;
   }).join("");
 }
 
@@ -353,9 +380,9 @@ function renderKnockout() {
   });
   $("#knockout-list").innerHTML = filtered.map((match) => {
     const realScore = match.goles_a_real !== "" && match.goles_b_real !== "" ? `${match.goles_a_real} - ${match.goles_b_real}` : "vs";
-    const location = match.ciudad ? `<p class="match-location">📍 ${match.ciudad}</p>` : "";
+    const location = match.ciudad ? `<p class="match-location">📍 ${escapeHtml(match.ciudad)}</p>` : "";
     const hour = match.hora ? ` · ${match.hora}` : "";
-    return `<article class="match-card"><div class="match-meta"><span class="group-pill knockout-pill">${match.fase}</span><span>${match.fecha}${hour}</span></div><div class="match-teams"><span>${match.equipo_a}</span><span class="score-box">${realScore}</span><span class="team-b">${match.equipo_b}</span></div>${location}<p class="match-location match-code">Código: ${match.id}</p></article>`;
+    return `<article class="match-card"><div class="match-meta"><span class="group-pill knockout-pill">${escapeHtml(match.fase)}</span><span>${escapeHtml(match.fecha)}${hour}</span></div><div class="match-teams">${teamBlock(match.equipo_a, "a")}<span class="score-box">${realScore}</span>${teamBlock(match.equipo_b, "b")}</div>${location}<p class="match-location match-code">Código: ${match.id}</p></article>`;
   }).join("");
   $("#knockout-empty").classList.toggle("hidden", filtered.length > 0);
 }
@@ -378,7 +405,9 @@ function renderPredictions() {
   });
   body.innerHTML = rows.map(({ prediction, match, points }) => {
     const result = match.goles_a_real !== "" && match.goles_b_real !== "" ? `${match.goles_a_real} - ${match.goles_b_real}` : "Pendiente";
-    return `<tr><td>${escapeHtml(prediction.participante)}</td><td>Grupo ${escapeHtml(match.grupo || "-")}</td><td>${escapeHtml(match.equipo_a || prediction.id_partido)} vs ${escapeHtml(match.equipo_b || "")}</td><td class="pred-score">${escapeHtml(formatPredictionValue(prediction, match))}</td><td class="pred-score">${result}</td><td>${points === "" ? "-" : points}</td></tr>`;
+    const teamA = match.equipo_a ? `${flagFor(match.equipo_a)} ${escapeHtml(match.equipo_a)}` : escapeHtml(prediction.id_partido);
+    const teamB = match.equipo_b ? `${escapeHtml(match.equipo_b)} ${flagFor(match.equipo_b)}` : "";
+    return `<tr><td>${escapeHtml(prediction.participante)}</td><td>Grupo ${escapeHtml(match.grupo || "-")}</td><td>${teamA} <span class="vs-sep">vs</span> ${teamB}</td><td class="pred-score">${escapeHtml(formatPredictionValue(prediction, match))}</td><td class="pred-score">${result}</td><td>${points === "" ? "-" : points}</td></tr>`;
   }).join("");
   empty.textContent = "Todavía no hay predicciones públicas configuradas.";
   empty.classList.toggle("hidden", rows.length > 0);
@@ -402,8 +431,6 @@ function renderSelects() {
   fillSelect($("#player-filter"), players, "Todos los participantes");
   fillPlainSelect($("#knockout-phase-filter"), phases, "Todas las fases");
 }
-
-
 
 function isDeadlineClosed() {
   const deadline = new Date(config.deadlineIso || "");
@@ -474,11 +501,11 @@ function renderPredictionMatch(match) {
   const name = `draft_${match.id}`;
   return `<article class="prediction-match-card">
     <div class="prediction-match-meta"><span>${escapeHtml(formatDate(match.fecha))} · ${escapeHtml(match.hora)}</span><span>${escapeHtml(match.ciudad)}</span></div>
-    <div class="prediction-match-title"><strong>${escapeHtml(match.equipo_a)}</strong><span>vs</span><strong>${escapeHtml(match.equipo_b)}</strong></div>
+    <div class="prediction-match-title">${teamBlock(match.equipo_a, "a")}<span class="vs">VS</span>${teamBlock(match.equipo_b, "b")}</div>
     <div class="outcome-options" role="radiogroup" aria-label="Predicción para ${escapeHtml(match.equipo_a)} vs ${escapeHtml(match.equipo_b)}">
-      <label><input type="radio" name="${name}" value="A" /><span>Gana ${escapeHtml(match.equipo_a)}</span></label>
+      <label><input type="radio" name="${name}" value="A" /><span>${flagFor(match.equipo_a)} Gana ${escapeHtml(match.equipo_a)}</span></label>
       <label><input type="radio" name="${name}" value="E" /><span>Empate</span></label>
-      <label><input type="radio" name="${name}" value="B" /><span>Gana ${escapeHtml(match.equipo_b)}</span></label>
+      <label><input type="radio" name="${name}" value="B" /><span>Gana ${escapeHtml(match.equipo_b)} ${flagFor(match.equipo_b)}</span></label>
     </div>
   </article>`;
 }
