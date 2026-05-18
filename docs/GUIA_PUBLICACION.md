@@ -1,106 +1,113 @@
-# Guía de publicación y conexión con Google Sheets
+# Guía rápida de publicación
 
-## 1. Crear el Google Sheet
+Esta versión del prode se publica como sitio estático y usa Google Apps Script para guardar predicciones en un Google Sheet maestro privado.
 
-1. Creá una hoja nueva en Google Sheets.
-2. Importá los CSV de la carpeta `google-sheets/` o copiá sus encabezados.
-3. Dejá estas pestañas con estos nombres exactos:
-   - `Partidos_Publicos`
-   - `Predicciones_Publicas`
-   - `Ranking`
-   - `Extras_Publicos`
-   - `Participantes`
+## 1. Publicar en GitHub Pages
 
-La web funciona con `Partidos_Publicos` y `Predicciones_Publicas`. `Ranking` es opcional porque la página puede calcularlo sola.
+1. Subí los archivos del proyecto al repositorio.
+2. Entrá a `Settings → Pages`.
+3. Elegí:
 
-## 2. Carga de predicciones
-
-### Opción recomendada: Google Form
-
-Armá un Google Form con:
-
-- nombre/apodo del participante;
-- WhatsApp opcional;
-- una pregunta por partido, por ejemplo: `GA01 - México vs Sudáfrica`;
-- formato recomendado de respuesta: `2-1`.
-
-Luego vinculá el Form con Google Sheets. Después podés transformar esas respuestas en la pestaña `Predicciones_Publicas`.
-
-### Opción alternativa: carga directa en Google Sheet
-
-Podés compartir una pestaña editable, pero no es lo ideal porque los participantes podrían borrar datos de otros. Si usás esta alternativa, protegé rangos y pedí que cada participante complete solo su bloque.
-
-## 3. Publicar las pestañas como CSV
-
-En Google Sheets:
-
-1. `Archivo` → `Compartir` → `Publicar en la Web`.
-2. Elegí la pestaña, por ejemplo `Predicciones_Publicas`.
-3. Elegí formato `Valores separados por comas (.csv)` si aparece la opción.
-4. Copiá el link publicado.
-
-El link que necesita la web suele tener esta forma:
-
-```txt
-https://docs.google.com/spreadsheets/d/e/ID_PUBLICADO/pub?gid=GID_DE_LA_PESTAÑA&single=true&output=csv
+```text
+Source: Deploy from a branch
+Branch: main
+Folder: /root
 ```
 
-Pegalo en `config.js`.
+4. Guardá y esperá el deploy.
+
+La URL queda parecida a:
+
+```text
+https://TU-USUARIO.github.io/TU-REPO/
+```
+
+## 2. Preparar Google Sheet maestro
+
+Tu Sheet maestro debe tener al menos la hoja:
+
+```text
+Partidos_Publicos
+```
+
+Con columnas:
+
+```csv
+id,fase,grupo,fecha_num,fecha,fecha_texto,hora,equipo_a,equipo_b,ciudad,goles_a_real,goles_b_real
+```
+
+El script puede crear automáticamente:
+
+```text
+Predicciones_Recibidas
+Predicciones_Publicas
+```
+
+## 3. Configurar Apps Script
+
+1. Abrí tu Google Sheet maestro.
+2. Andá a `Extensiones → Apps Script`.
+3. Pegá el contenido de:
+
+```text
+apps-script/Code.gs
+```
+
+4. Cambiá:
+
+```js
+const SPREADSHEET_ID = "PEGAR_ID_DEL_GOOGLE_SHEET_MAESTRO";
+```
+
+por el ID real del Sheet.
+
+5. Desplegá como Web App:
+
+```text
+Deploy → New deployment → Web app
+Execute as: Me
+Who has access: Anyone
+```
+
+6. Copiá la URL `/exec`.
 
 ## 4. Configurar la web
 
-Abrí `config.js` y completá:
+En `config.js`, reemplazá:
 
 ```js
-predictionFormUrl: "https://forms.gle/tu-form",
-sheets: {
-  partidosCsvUrl: "URL_CSV_PARTIDOS",
-  prediccionesCsvUrl: "URL_CSV_PREDICCIONES",
-  rankingCsvUrl: "",
-  extrasCsvUrl: ""
-}
+const PRODE_API_URL = "https://script.google.com/macros/s/PEGAR_ID_DE_TU_DEPLOY/exec";
 ```
 
-También ajustá:
+por la URL real del Apps Script.
 
-```js
-deadlineIso: "2026-06-11T11:30:00-03:00"
+## 5. Subir cambios
+
+Desde la terminal en la carpeta del repo:
+
+```bash
+git add .
+git commit -m "Agregar carga de predicciones desde la web"
+git push
 ```
 
-## 5. Publicar en GitHub Pages
+## 6. Probar
 
-1. Creá un repositorio nuevo en GitHub, por ejemplo `prode-mundial-2026`.
-2. Subí todos los archivos de esta carpeta.
-3. Entrá al repositorio → `Settings` → `Pages`.
-4. En `Build and deployment`, elegí:
-   - Source: `Deploy from a branch`.
-   - Branch: `main`.
-   - Folder: `/root`.
-5. Guardá.
-6. Tu página va a quedar en una URL del estilo:
+1. Entrá a la web publicada.
+2. Tocá `Completar mi predicción`.
+3. Completá nombre y todos los partidos.
+4. Enviá.
+5. Revisá en el Google Sheet maestro si se completaron:
 
-```txt
-https://TU-USUARIO.github.io/prode-mundial-2026/
+```text
+Predicciones_Recibidas
+Predicciones_Publicas
 ```
 
-## 6. Publicar en Vercel
+## Seguridad práctica
 
-1. Entrá a Vercel.
-2. Importá el repositorio desde GitHub.
-3. Framework preset: `Other`.
-4. Build command: dejar vacío.
-5. Output directory: dejar vacío o `.`.
-6. Deploy.
-
-## 7. Mensaje para WhatsApp
-
-```txt
-🏆 Prode Mundial 2026
-
-Ya está abierta la carga de predicciones.
-Entrá acá para participar:
-LINK_DE_TU_WEB
-
-Fecha límite: 11/06/2026 11:30 hs.
-Después del cierre se publican las predicciones de todos y el ranking.
-```
+- No compartas el Google Sheet maestro con participantes.
+- No pongas links sensibles directos en `config.js`.
+- Usá Apps Script como intermediario.
+- Antes del cierre, no muestres predicciones públicas.
+- El ranking se puede calcular desde la web o desde una hoja `Ranking`.

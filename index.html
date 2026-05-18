@@ -34,7 +34,9 @@
 
     <nav class="tabs" aria-label="Secciones del prode">
       <button class="tab is-active" data-view="inicio">Inicio</button>
+      <button class="tab" data-view="cargar">Cargar predicción</button>
       <button class="tab" data-view="fixture">Fixture</button>
+      <button class="tab" data-view="eliminatorias">Eliminatorias</button>
       <button class="tab" data-view="ranking">Ranking</button>
       <button class="tab" data-view="predicciones">Predicciones</button>
       <button class="tab" data-view="reglas">Reglas</button>
@@ -60,12 +62,72 @@
         </section>
       </section>
 
+
+      <section id="view-cargar" class="view">
+        <section id="cargar-prode" class="panel section-heading prediction-heading">
+          <div>
+            <h2>Cargar predicción</h2>
+            <p>Elegí solamente el resultado de cada partido: gana el primer equipo, empate o gana el segundo equipo. No hace falta cargar goles.</p>
+          </div>
+          <span class="submission-badge" id="submission-mode-badge">Carga desde la web</span>
+        </section>
+
+        <form id="prediction-form" class="prediction-form" method="post" target="prediction-submit-frame">
+          <input type="hidden" name="tipo" value="prediccion" />
+          <input type="hidden" name="version" value="resultado-simple-v1" />
+
+          <section class="form-panel">
+            <div class="form-grid">
+              <label class="form-label">Nombre o apodo
+                <input id="participant-name" name="participante" type="text" placeholder="Ej: Santi" required maxlength="60" autocomplete="name" />
+              </label>
+              <label class="form-label">WhatsApp o contacto
+                <input id="participant-contact" name="whatsapp" type="text" placeholder="Opcional, para identificar tu prode" maxlength="80" autocomplete="tel" />
+              </label>
+            </div>
+            <p class="form-help">El nombre/apodo es el que va a aparecer en la tabla pública después del cierre.</p>
+          </section>
+
+          <div class="form-tools">
+            <label>Filtrar grupo<select id="prediction-form-group-filter"></select></label>
+            <label>Buscar partido<input id="prediction-form-search" type="search" placeholder="Argentina, México, Grupo A..." /></label>
+          </div>
+
+          <div id="prediction-form-list" class="prediction-form-list"></div>
+
+          <section class="form-submit-bar">
+            <div>
+              <strong id="prediction-progress">0 de 72 partidos seleccionados</strong>
+              <p id="prediction-form-status">Completá todos los partidos antes de enviar.</p>
+            </div>
+            <button id="prediction-submit-button" class="button button--primary" type="submit">Enviar predicción</button>
+          </section>
+        </form>
+
+        <iframe id="prediction-submit-frame" name="prediction-submit-frame" class="hidden" title="Estado de envío"></iframe>
+      </section>
+
       <section id="view-fixture" class="view">
         <div class="toolbar">
           <label>Grupo<select id="group-filter"></select></label>
           <label>Buscar equipo o ciudad<input id="fixture-search" type="search" placeholder="Argentina, México, Dallas..." /></label>
         </div>
         <div id="fixture-list" class="match-grid"></div>
+      </section>
+
+      <section id="view-eliminatorias" class="view">
+        <section class="panel section-heading">
+          <div>
+            <h2>Eliminación directa</h2>
+            <p>Los cruces están precargados como placeholders. Cuando se conozcan los clasificados, podés reemplazarlos desde el archivo local o desde una hoja pública de Google Sheets.</p>
+          </div>
+        </section>
+        <div class="toolbar">
+          <label>Fase<select id="knockout-phase-filter"></select></label>
+          <label>Buscar equipo, fase o sede<input id="knockout-search" type="search" placeholder="Final, semifinal, MetLife..." /></label>
+        </div>
+        <div id="knockout-list" class="match-grid"></div>
+        <p id="knockout-empty" class="empty-state hidden">Todavía no hay cruces de eliminación directa configurados.</p>
       </section>
 
       <section id="view-ranking" class="view">
@@ -90,7 +152,7 @@
 
       <section id="view-reglas" class="view">
         <div class="rules-grid">
-          <article class="panel"><h2>Reglas de puntaje</h2><ul class="rule-list"><li><strong id="score-exact">3</strong> puntos por resultado exacto.</li><li><strong id="score-outcome">1</strong> punto por acertar ganador o empate.</li><li><strong id="score-miss">0</strong> puntos si no acierta.</li></ul></article>
+          <article class="panel"><h2>Reglas de puntaje</h2><ul class="rule-list"><li><strong id="score-outcome">1</strong> punto por acertar ganador, perdedor o empate.</li><li><strong id="score-miss">0</strong> puntos si no acierta.</li><li>En esta modalidad simple no se cargan goles: solo importa el resultado del partido.</li></ul></article>
           <article class="panel"><h2>Extras sugeridos</h2><ul class="rule-list"><li>Campeón: <strong id="score-champion">10</strong> puntos.</li><li>Subcampeón: <strong id="score-runner-up">6</strong> puntos.</li><li>Goleador: <strong id="score-top-scorer">6</strong> puntos.</li><li>Equipo revelación: <strong id="score-revelation">4</strong> puntos.</li></ul></article>
         </div>
       </section>
@@ -100,6 +162,7 @@
   <footer class="site-footer"><span>Prode organizado por <strong id="organizer-name">Santi</strong></span><span>Datos desde Google Sheets</span></footer>
   <script src="config.js"></script>
   <script src="data/fixture.js"></script>
+  <script src="data/eliminatorias.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
