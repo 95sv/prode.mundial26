@@ -126,8 +126,10 @@ async function loadData() {
    
 
 function normalizeMatch(row) {
+  const id = row.id || row.id_partido || row.partido_id || "";
+  const fromFixture = (window.PRODE_FIXTURE || []).find((m) => m.id === id);
   return {
-    id: row.id || row.id_partido || row.partido_id || "",
+    id: id,
     fase: row.fase || "Grupos",
     grupo: row.grupo || "",
     fecha_num: row.fecha_num || "",
@@ -138,7 +140,8 @@ function normalizeMatch(row) {
     equipo_b: row.equipo_b || row.visitante || row.equipo_visitante || "",
     ciudad: row.ciudad || row.sede || "",
     goles_a_real: cleanNumber(row.goles_a_real ?? row.goles_local),
-    goles_b_real: cleanNumber(row.goles_b_real ?? row.goles_visitante)
+    goles_b_real: cleanNumber(row.goles_b_real ?? row.goles_visitante),
+    cuotas: fromFixture?.cuotas        
   };
 }
 
@@ -511,13 +514,17 @@ function renderPredictionForm() {
 
 function renderPredictionMatch(match) {
   const name = `draft_${match.id}`;
+  const cuota = match.cuotas;
+  const odd = (val) => (val !== undefined && val !== null && val !== "")
+    ? `<small class="opt-odd">${val}</small>`
+    : "";
   return `<article class="prediction-match-card">
     <div class="prediction-match-meta"><span>${escapeHtml(formatDate(match.fecha))} · ${escapeHtml(match.hora)}</span><span>${escapeHtml(match.ciudad)}</span></div>
     <div class="prediction-match-title">${teamBlock(match.equipo_a, "a")}<span class="vs">VS</span>${teamBlock(match.equipo_b, "b")}</div>
     <div class="outcome-options" role="radiogroup" aria-label="Predicción para ${escapeHtml(match.equipo_a)} vs ${escapeHtml(match.equipo_b)}">
-      <label><input type="radio" name="${name}" value="A" /><span>${flagFor(match.equipo_a)} Gana ${escapeHtml(match.equipo_a)}</span></label>
-      <label><input type="radio" name="${name}" value="E" /><span>Empate</span></label>
-      <label><input type="radio" name="${name}" value="B" /><span>Gana ${escapeHtml(match.equipo_b)} ${flagFor(match.equipo_b)}</span></label>
+      <label><input type="radio" name="${name}" value="A" /><span><span class="opt-line">${flagFor(match.equipo_a)}<span>Gana ${escapeHtml(match.equipo_a)}</span></span>${odd(cuota?.a)}</span></label>
+      <label><input type="radio" name="${name}" value="E" /><span><span class="opt-line">Empate</span>${odd(cuota?.e)}</span></label>
+      <label><input type="radio" name="${name}" value="B" /><span><span class="opt-line"><span>Gana ${escapeHtml(match.equipo_b)}</span>${flagFor(match.equipo_b)}</span>${odd(cuota?.b)}</span></label>
     </div>
   </article>`;
 }
