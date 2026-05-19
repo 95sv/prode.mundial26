@@ -1,5 +1,5 @@
 
-const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbysxR-Qgr5koHQWT7Es3mvExrr6anIesjPsrepxHYZLlomBacNEUimWW0QDxyXUrfjHXA/exec";
+const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbwrymfG8hdAeUZb4AR2xXrP5v3rHt6CnXzZSC10BS61Bd9kmqlueJcePr4r-vjYGBXyuQ/exec";
 
 window.PRODE_CONFIG = {
   title: "Prode Mundial 2026",
