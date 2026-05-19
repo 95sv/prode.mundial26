@@ -28,11 +28,11 @@ window.PRODE_CONFIG = {
   },
 
   sheets: {
-    partidosCsvUrl: `${PRODE_API_URL}?view=partidos`,
-    prediccionesCsvUrl: `${PRODE_API_URL}?view=predicciones`,
-    rankingCsvUrl: `${PRODE_API_URL}?view=ranking`,
-    extrasCsvUrl: `${PRODE_API_URL}?view=extras`,
-    eliminatoriasCsvUrl: `${PRODE_API_URL}?view=eliminatorias`
+    partidosCsvUrl: PRODE_API_URL + "?view=partidos",
+    prediccionesCsvUrl: PRODE_API_URL + "?view=predicciones",
+    rankingCsvUrl: PRODE_API_URL + "?view=ranking",
+    extrasCsvUrl: PRODE_API_URL + "?view=extras",
+    eliminatoriasCsvUrl: PRODE_API_URL + "?view=eliminatorias"
   },
 
   showPredictionsBeforeDeadline: true
