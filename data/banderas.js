@@ -1,5 +1,19 @@
-// Mapeo de nombres de selecciones (tal como aparecen en el fixture) a banderas emoji.
-// Si una bandera no renderiza en algun sistema operativo, el código del país queda como fallback visual.
+window.PRODE_ISO = {
+  "Argentina": "ar", "Brasil": "br", "Colombia": "co", "Ecuador": "ec",
+  "Paraguay": "py", "Uruguay": "uy",
+  "Canadá": "ca", "Curazao": "cw", "Estados Unidos": "us", "Haití": "ht",
+  "México": "mx", "Panamá": "pa",
+  "Alemania": "de", "Austria": "at", "Bélgica": "be", "Bosnia-Herz.": "ba",
+  "Croacia": "hr", "Escocia": "gb-sct", "España": "es", "Francia": "fr",
+  "Inglaterra": "gb-eng", "Italia": "it", "Noruega": "no", "Países Bajos": "nl",
+  "Portugal": "pt", "R. Checa": "cz", "Suecia": "se", "Suiza": "ch", "Turquía": "tr",
+  "Arabia Saudita": "sa", "Australia": "au", "Catar": "qa", "Irak": "iq",
+  "Japón": "jp", "Jordania": "jo", "Nueva Zelanda": "nz",
+  "Rep. de Corea": "kr", "RI de Irán": "ir", "Uzbekistán": "uz",
+  "Argelia": "dz", "Cabo Verde": "cv", "Congo": "cd", "Costa de Marfil": "ci",
+  "Egipto": "eg", "Ghana": "gh", "Marruecos": "ma", "Senegal": "sn",
+  "Sudáfrica": "za", "Túnez": "tn"
+};
 window.PRODE_BANDERAS = {
   // CONMEBOL
   "Argentina": "🇦🇷",

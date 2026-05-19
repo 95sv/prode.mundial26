@@ -31,16 +31,15 @@ function escapeHtml(value) {
 // Devuelve la bandera emoji para una selección dada.
 function flagFor(team) {
   const raw = String(team || "").trim();
-  if (!raw) return "🏳️";
-  const map = window.PRODE_BANDERAS || {};
-  const alias = window.PRODE_BANDERAS_ALIAS || {};
-  if (map[raw]) return map[raw];
-  if (alias[raw] && map[alias[raw]]) return map[alias[raw]];
-  // Placeholders de eliminatorias: "Ganador R32-01", "Clasificado 5", etc.
+  if (!raw) return "";
+  const iso = window.PRODE_ISO?.[raw]
+    || window.PRODE_ISO?.[window.PRODE_BANDERAS_ALIAS?.[raw] || ""];
+  if (iso) {
+    return `<img class="team__flag-img" loading="lazy" width="40" height="30" alt="${escapeHtml(raw)}" src="https://flagcdn.com/h40/${iso}.png" srcset="https://flagcdn.com/h80/${iso}.png 2x">`;
+  }
   if (/^(ganador|perdedor|clasificado)\b/i.test(raw)) return "🎯";
   return "🏳️";
 }
-
 // Bloque visual de un equipo (bandera + nombre). `side` = "a" o "b".
 function teamBlock(team, side = "a") {
   const flag = flagFor(team);

@@ -539,14 +539,19 @@ select option { background: var(--surface); color: var(--ink); }
   height: 42px;
   display: grid;
   place-items: center;
-  font-size: 1.65rem;
-  line-height: 1;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--line);
   border-radius: 12px;
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Twemoji Mozilla", sans-serif;
+  overflow: hidden;
 }
 
+.team__flag-img {
+  width: 36px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
 .team__name {
   font-weight: 900;
   font-size: 1rem;
