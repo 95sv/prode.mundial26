@@ -41,5 +41,5 @@ window.PRODE_CONFIG = {
   },
 
   // Recomendado false: oculta predicciones hasta el cierre.
-  showPredictionsBeforeDeadline: false
+  showPredictionsBeforeDeadline: true
 };
