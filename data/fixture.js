@@ -13,7 +13,7 @@ window.PRODE_FIXTURE = [
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
     "goles_b_real": "",
-     "cuotas": { "a": 1.55, "e": 3.90, "b": 6.50 } 
+    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 } 
   },
   {
     "id": "GA02",
@@ -27,7 +27,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "R. Checa",
     "ciudad": "Guadalajara",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 2.55, "e": 3.2, "b": 2.6 } 
   },
   {
     "id": "GB01",
@@ -41,7 +42,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Bosnia-Herz.",
     "ciudad": "Toronto",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.8, "b": 3.8 } 
   },
   {
     "id": "GD01",
@@ -55,7 +57,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Paraguay",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 } 
   },
   {
     "id": "GB02",
@@ -69,7 +72,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Suiza",
     "ciudad": "San Francisco",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 9, "e": 5.25, "b": 1.27 }
   },
   {
     "id": "GC01",
@@ -83,7 +87,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Marruecos",
     "ciudad": "New York",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 }
   },
   {
     "id": "GC02",
@@ -97,7 +102,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Escocia",
     "ciudad": "Boston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 }
   },
   {
     "id": "GD02",
@@ -111,7 +117,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Turquía",
     "ciudad": "Vancouver",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 }
   },
   {
     "id": "GE01",
@@ -125,7 +132,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Curazao",
     "ciudad": "Houston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.04, "e": 15, "b": 41 }
   },
   {
     "id": "GF01",
@@ -139,7 +147,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Japón",
     "ciudad": "Dallas",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.95, "e": 3.6, "b": 3.33 } 
   },
   {
     "id": "GE02",
@@ -153,7 +162,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Ecuador",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 }
   },
   {
     "id": "GF02",
@@ -167,7 +177,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Túnez",
     "ciudad": "Monterrey",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7} 
   },
   {
     "id": "GG01",
@@ -181,7 +192,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Cabo Verde",
     "ciudad": "Atlanta",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.09, "e": 13, "b": 21 }
   },
   {
     "id": "GG02",
@@ -195,7 +207,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Egipto",
     "ciudad": "Seattle",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GH01",
@@ -209,7 +222,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Uruguay",
     "ciudad": "Miami",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }
   },
   {
     "id": "GH02",
@@ -223,7 +237,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Nueva Zelanda",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GI01",
@@ -237,7 +252,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Senegal",
     "ciudad": "New York",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }
   },
   {
     "id": "GI02",
@@ -251,7 +267,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Noruega",
     "ciudad": "Boston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 3.5, "e": 3.5, "b": 2.1 }
   },
   {
     "id": "GJ01",
@@ -265,7 +282,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Argelia",
     "ciudad": "Kansas City",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }
   },
   {
     "id": "GJ02",
@@ -279,7 +297,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Jordania",
     "ciudad": "San Francisco",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GK01",
@@ -293,7 +312,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Congo",
     "ciudad": "Houston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.09, "e": 13, "b": 21 }
   },
   {
     "id": "GK02",
@@ -307,7 +327,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Croacia",
     "ciudad": "Dallas",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GL01",
@@ -321,7 +342,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Panamá",
     "ciudad": "Toronto",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GL02",
@@ -335,7 +357,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Colombia",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
   },
   {
     "id": "GA03",
@@ -349,7 +372,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Sudáfrica",
     "ciudad": "Atlanta",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GB03",
@@ -363,7 +387,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Bosnia-Herz.",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GB04",
@@ -377,7 +402,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Catar",
     "ciudad": "Vancouver",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GA04",
@@ -391,7 +417,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Rep. de Corea",
     "ciudad": "Guadalajara",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 } 
   },
   {
     "id": "GD03",
@@ -405,7 +432,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Australia",
     "ciudad": "Seattle",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 } 
   },
   {
     "id": "GC03",
@@ -419,7 +447,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Marruecos",
     "ciudad": "Boston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 } 
   },
   {
     "id": "GC04",
@@ -433,7 +462,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Haití",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 } 
   },
   {
     "id": "GD04",
@@ -447,7 +477,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Paraguay",
     "ciudad": "San Francisco",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 } 
   },
   {
     "id": "GF03",
@@ -461,7 +492,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Túnez",
     "ciudad": "Toronto",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7}  
   },
   {
     "id": "GE03",
@@ -475,7 +507,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Ecuador",
     "ciudad": "Houston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 } 
   },
   {
     "id": "GE04",
@@ -489,7 +522,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Costa de Marfil",
     "ciudad": "Dallas",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.04, "e": 15, "b": 41 } 
   },
   {
     "id": "GF04",
@@ -503,7 +537,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Suecia",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.95, "e": 3.6, "b": 3.33 }  
   },
   {
     "id": "GH03",
@@ -517,7 +552,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "RI de Irán",
     "ciudad": "Boston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GG03",
@@ -531,7 +567,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Egipto",
     "ciudad": "New York",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 } 
   },
   {
     "id": "GH04",
@@ -545,7 +582,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Nueva Zelanda",
     "ciudad": "Kansas City",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
   },
   {
     "id": "GG04",
@@ -559,7 +597,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Bélgica",
     "ciudad": "Seattle",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.09, "e": 13, "b": 21 }
   },
   {
     "id": "GJ03",
@@ -573,7 +612,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Austria",
     "ciudad": "Dallas",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }  
   },
   {
     "id": "GI03",
@@ -587,7 +627,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Noruega",
     "ciudad": "Toronto",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 2.55, "e": 3.2, "b": 2.6 } 
   },
   {
     "id": "GJ04",
@@ -601,7 +642,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Jordania",
     "ciudad": "Monterrey",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GI04",
@@ -615,7 +657,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Irak",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }  
   },
   {
     "id": "GK03",
@@ -629,7 +672,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Congo",
     "ciudad": "Vancouver",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GL03",
@@ -643,7 +687,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Panamá",
     "ciudad": "San Francisco",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GK04",
@@ -657,7 +702,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Inglaterra",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GL04",
@@ -671,7 +717,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Ghana",
     "ciudad": "Seattle",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
   },
   {
     "id": "GB05",
@@ -685,7 +732,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Canadá",
     "ciudad": "Toronto",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GB06",
@@ -699,7 +747,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Catar",
     "ciudad": "Vancouver",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GA05",
@@ -713,7 +762,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Rep. de Corea",
     "ciudad": "New York",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GA06",
@@ -727,7 +777,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "R. Checa",
     "ciudad": "Boston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 } 
   },
   {
     "id": "GD05",
@@ -741,7 +792,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Australia",
     "ciudad": "Houston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 } 
   },
   {
     "id": "GD06",
@@ -755,7 +807,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Turquía",
     "ciudad": "Dallas",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 } 
   },
   {
     "id": "GC05",
@@ -769,7 +822,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Haití",
     "ciudad": "Atlanta",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 } 
   },
   {
     "id": "GC06",
@@ -783,7 +837,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Escocia",
     "ciudad": "Seattle",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 } 
   },
   {
     "id": "GF05",
@@ -797,7 +852,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Japón",
     "ciudad": "Miami",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7}  
   },
   {
     "id": "GF06",
@@ -811,7 +867,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Países Bajos",
     "ciudad": "San Francisco",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7}  
   },
   {
     "id": "GE05",
@@ -825,7 +882,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Alemania",
     "ciudad": "Kansas City",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 } 
   },
   {
     "id": "GE06",
@@ -839,7 +897,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Costa de Marfil",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 } 
   },
   {
     "id": "GH05",
@@ -853,7 +912,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Uruguay",
     "ciudad": "Toronto",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
   },
   {
     "id": "GH06",
@@ -867,7 +927,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Arabia Saudita",
     "ciudad": "Vancouver",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }   
   },
   {
     "id": "GG05",
@@ -881,7 +942,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "España",
     "ciudad": "Monterrey",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 } 
   },
   {
     "id": "GG06",
@@ -895,7 +957,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Bélgica",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 } 
   },
   {
     "id": "GJ05",
@@ -909,7 +972,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Austria",
     "ciudad": "New York",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GJ06",
@@ -923,7 +987,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Argentina",
     "ciudad": "Boston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GI05",
@@ -937,7 +1002,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Francia",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }  
   },
   {
     "id": "GI06",
@@ -951,7 +1017,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Senegal",
     "ciudad": "Seattle",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }    
   },
   {
     "id": "GL05",
@@ -965,7 +1032,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Uzbekistán",
     "ciudad": "Houston",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 2.5, "e": 3.5, "b": 2.25 }   
   },
   {
     "id": "GL06",
@@ -979,7 +1047,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Ghana",
     "ciudad": "Dallas",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   },
   {
     "id": "GK05",
@@ -993,7 +1062,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Portugal",
     "ciudad": "Atlanta",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.09, "e": 13, "b": 21 } 
   },
   {
     "id": "GK06",
@@ -1007,6 +1077,7 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Inglaterra",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
   }
 ];
