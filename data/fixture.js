@@ -12,7 +12,8 @@ window.PRODE_FIXTURE = [
     "equipo_b": "Sudáfrica",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
-    "goles_b_real": ""
+    "goles_b_real": "",
+     "cuotas": { "a": 1.55, "e": 3.90, "b": 6.50 } 
   },
   {
     "id": "GA02",

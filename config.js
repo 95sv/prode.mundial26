@@ -1,5 +1,5 @@
 
-const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbyJ1xZAFVTUoCMS4yrpslFoc6aSqBuTCVU03rSibAqnvT11RbTNM9idepTFz-a-Tgx0hQ/exec";
+const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbwK09vDSe5eqtQwRoz5dEyNyuRDi4O0BmoiXICqdrhfvtW0Sbdd5cJwQYXUnLJtwrl87Q/exec";
 
 window.PRODE_CONFIG = {
   title: "Prode Mundial 2026",
@@ -32,8 +32,7 @@ window.PRODE_CONFIG = {
     prediccionesCsvUrl: PRODE_API_URL + "?view=predicciones",
     rankingCsvUrl: PRODE_API_URL + "?view=ranking",
     extrasCsvUrl: PRODE_API_URL + "?view=extras",
-    eliminatoriasCsvUrl: PRODE_API_URL + "?view=eliminatorias",
-    cuotasCsvUrl: PRODE_API_URL + "?view=cuotas"
+    eliminatoriasCsvUrl: PRODE_API_URL + "?view=eliminatorias"
   },
 
   showPredictionsBeforeDeadline: true
