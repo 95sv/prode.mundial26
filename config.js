@@ -2,7 +2,7 @@
 // En esta versión, la carga de predicciones se hace desde la propia página.
 // El formulario envía los datos a Google Apps Script, que guarda todo en tu Google Sheet maestro privado.
 
-const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbwEOubDKmXJtig2WhFqakLY5vzHuDOV6IZzq7QperUp7vl2555g7-WfrW4sBZIdr55C/exec";
+const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbwVCoJT_2KWfokYbfoNHpKfd0COHM1_nEWvnaa-O4SQwMkK1Kg_a9Q28LvXsAJF729MGg/exec";
 
 window.PRODE_CONFIG = {
   title: "Prode Mundial 2026",
