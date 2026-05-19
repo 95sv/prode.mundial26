@@ -5,6 +5,7 @@ let predicciones = [];
 let ranking = [];
 let extras = [];
 let predictionDraft = {};
+let cuotasMap = {}; 
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -105,18 +106,31 @@ async function fetchCsv(url) {
 async function loadData() {
   try {
     const sheets = config.sheets || {};
-    const [sheetMatches, sheetPredictions, sheetRanking, sheetExtras, sheetKnockout] = await Promise.all([
+    const [sheetMatches, sheetPredictions, sheetRanking, sheetExtras, sheetKnockout,sheetCuotas] = await Promise.all([
       fetchCsv(sheets.partidosCsvUrl).catch(() => []),
       fetchCsv(sheets.prediccionesCsvUrl).catch(() => []),
       fetchCsv(sheets.rankingCsvUrl).catch(() => []),
       fetchCsv(sheets.extrasCsvUrl).catch(() => []),
-      fetchCsv(sheets.eliminatoriasCsvUrl).catch(() => [])
+      fetchCsv(sheets.eliminatoriasCsvUrl).catch(() => []),
+      fetchCsv(sheets.cuotasCsvUrl).catch(() => [])
     ]);
     if (sheetMatches.length) partidos = sheetMatches.map(normalizeMatch);
     if (sheetKnockout.length) eliminatorias = sheetKnockout.map(normalizeKnockout);
     predicciones = dedupePredictions(sheetPredictions.map(normalizePrediction).filter((p) => p.participante && p.id_partido));
     extras = sheetExtras;
     ranking = sheetRanking.length ? sheetRanking.map(normalizeRanking).filter((r) => r.participante) : computeRanking();
+    
+    cuotasMap = {};
+    sheetCuotas.forEach((row) => {
+      const key = `${row.equipo_a}||${row.equipo_b}`;
+      cuotasMap[key] = {
+        a: row.cuota_a,
+        e: row.cuota_empate,
+        b: row.cuota_b,
+        casa: row.casa
+      };
+    });
+    
     renderAll();
   } catch (error) {
     console.error(error);
@@ -366,7 +380,19 @@ function renderFixture() {
   });
   $("#fixture-list").innerHTML = filtered.map((match) => {
     const realScore = match.goles_a_real !== "" && match.goles_b_real !== "" ? `${match.goles_a_real} - ${match.goles_b_real}` : "vs";
-    return `<article class="match-card"><div class="match-meta"><span class="group-pill">Grupo ${match.grupo}</span><span>${formatDate(match.fecha)} · ${match.hora}</span></div><div class="match-teams">${teamBlock(match.equipo_a, "a")}<span class="score-box">${realScore}</span>${teamBlock(match.equipo_b, "b")}</div><p class="match-location">📍 ${escapeHtml(match.ciudad)}</p></article>`;
+    const cuota = cuotasMap[`${match.equipo_a}||${match.equipo_b}`];
+    const cuotasHtml = cuota ? `
+      <div class="odds-row" title="Cuotas: ${escapeHtml(cuota.casa || "")}">
+        <span class="odd"><em>1</em><strong>${cuota.a}</strong></span>
+        <span class="odd"><em>X</em><strong>${cuota.e}</strong></span>
+        <span class="odd"><em>2</em><strong>${cuota.b}</strong></span>
+      </div>` : "";
+    return `<article class="match-card">
+      <div class="match-meta"><span class="group-pill">Grupo ${match.grupo}</span><span>${formatDate(match.fecha)} · ${match.hora}</span></div>
+      <div class="match-teams">${teamBlock(match.equipo_a, "a")}<span class="score-box">${realScore}</span>${teamBlock(match.equipo_b, "b")}</div>
+      ${cuotasHtml}
+      <p class="match-location">📍 ${escapeHtml(match.ciudad)}</p>
+    </article>`;
   }).join("");
 }
 
