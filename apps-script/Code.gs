@@ -1,7 +1,3 @@
-// Apps Script para Prode Mundial 2026.
-// Funciona como API pública controlada: entrega datos públicos por GET y recibe predicciones por POST.
-// El Google Sheet maestro puede permanecer privado.
-
 const SPREADSHEET_ID = "1GBlxEIDgvuBRiS4BGCLLYzNEFjm6Q1hS4SjD8AsY-aw";
 const DEADLINE_ISO = "2026-06-11T11:30:00-03:00";
 const SHOW_PREDICTIONS_BEFORE_DEADLINE = false;
