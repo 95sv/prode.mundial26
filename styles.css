@@ -910,3 +910,78 @@ tbody tr:last-child td { border-bottom: 0; }
   .prediction-match-meta { flex-direction: column; gap: 4px; text-align: center; }
   .tab { padding: 10px 14px; font-size: 0.82rem; }
 }
+
+
+/* === Predicción Más de 2 goles (Sí / No) === */
+.over-options {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+.over-options__label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  color: var(--ink-soft, #c4c4c4);
+  padding-right: 4px;
+}
+
+.over-options label {
+  display: block;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 800;
+}
+
+.over-options input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.over-options > label > span {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.over-options > label > span:hover {
+  transform: translateY(-1px);
+  border-color: var(--gold-line);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.over-options input:checked + span {
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
+  border-color: var(--gold-bright);
+  color: #0b0d12;
+  box-shadow: 0 12px 28px rgba(212, 175, 55, 0.28);
+}
+
+@media (max-width: 720px) {
+  .over-options {
+    grid-template-columns: 1fr 1fr;
+  }
+  .over-options__label {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+}
+

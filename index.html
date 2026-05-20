@@ -71,13 +71,13 @@
         <section id="cargar-prode" class="panel section-heading prediction-heading">
           <div>
             <h2>Cargar predicción</h2>
-            <p>Elegí solamente el resultado de cada partido: gana el primer equipo, empate o gana el segundo equipo. No hace falta cargar goles.</p>
+            <p>Para cada partido elegí dos cosas: <strong>quién gana (o si empatan)</strong> y si vas a tener <strong>más de 2 goles</strong> en el partido (sí o no).</p>
           </div>
           <span class="submission-badge" id="submission-mode-badge">Carga desde la web</span>
         </section>
         <form id="prediction-form" class="prediction-form" method="post" target="prediction-submit-frame">
           <input type="hidden" name="tipo" value="prediccion" />
-          <input type="hidden" name="version" value="resultado-simple-v1" />
+          <input type="hidden" name="version" value="prode-cuotas-v1" />
           <section class="form-panel">
             <div class="form-grid">
               <label class="form-label">Nombre o apodo
@@ -96,7 +96,7 @@
           <div id="prediction-form-list" class="prediction-form-list"></div>
           <section class="form-submit-bar">
             <div>
-              <strong id="prediction-progress">0 de 72 partidos seleccionados</strong>
+              <strong id="prediction-progress">0 de 72 resultados · 0 de 72 más de 2 goles</strong>
               <p id="prediction-form-status">Completá todos los partidos antes de enviar.</p>
             </div>
             <button id="prediction-submit-button" class="button button--primary" type="submit">Enviar predicción</button>
@@ -144,13 +144,13 @@
           <label>Grupo<select id="prediction-group-filter"></select></label>
           <label>Buscar<input id="prediction-search" type="search" placeholder="Equipo, partido o participante..." /></label>
         </div>
-        <div class="table-wrap"><table><thead><tr><th>Participante</th><th>Grupo</th><th>Partido</th><th>Predicción</th><th>Resultado</th><th>Puntos</th></tr></thead><tbody id="predictions-body"></tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>Participante</th><th>Grupo</th><th>Partido</th><th>1X2</th><th>+2 goles</th><th>Resultado real</th><th>Puntos</th></tr></thead><tbody id="predictions-body"></tbody></table></div>
         <p id="predictions-empty" class="empty-state">Todavía no hay predicciones públicas configuradas.</p>
       </section>
 
       <section id="view-reglas" class="view">
         <div class="rules-grid">
-          <article class="panel"><h2>Reglas de puntaje</h2><ul class="rule-list"><li><strong id="score-outcome">1</strong> punto por acertar ganador, perdedor o empate.</li><li><strong id="score-miss">0</strong> puntos si no acierta.</li><li>En esta modalidad simple no se cargan goles: solo importa el resultado del partido.</li></ul></article>
+          <article class="panel"><h2>Reglas de puntaje</h2><ul class="rule-list"><li><strong>1X2:</strong> al acertar A / E / B sumás <strong>la cuota del resultado real × <span id="score-outcome-factor">100</span></strong> puntos (ej.: cuota 1.50 → 150 pts).</li><li><strong>Más de 2 goles:</strong> al acertar S / N sumás <strong id="score-over-bonus">100</strong> puntos extra.</li><li><strong id="score-miss">0</strong> puntos si no acierta.</li><li>Cada partido suma 1X2 + over por separado, así que un partido puede valer 0, los 100 del over, la cuota×100, o las dos cosas.</li></ul></article>
           <article class="panel"><h2>Extras sugeridos</h2><ul class="rule-list"><li>Campeón: <strong id="score-champion">10</strong> puntos.</li><li>Subcampeón: <strong id="score-runner-up">6</strong> puntos.</li><li>Goleador: <strong id="score-top-scorer">6</strong> puntos.</li><li>Equipo revelación: <strong id="score-revelation">4</strong> puntos.</li></ul></article>
         </div>
       </section>

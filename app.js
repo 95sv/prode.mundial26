@@ -4,7 +4,8 @@ let eliminatorias = Array.isArray(window.PRODE_KNOCKOUT) ? [...window.PRODE_KNOC
 let predicciones = [];
 let ranking = [];
 let extras = [];
-let predictionDraft = {};
+let predictionDraft = {};       // resultado 1X2 por id_partido (A/E/B)
+let predictionOverDraft = {};   // más de 2 goles por id_partido (S/N)
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -62,6 +63,14 @@ function normalizeOutcome(value) {
   if (["A", "LOCAL", "EQUIPO_A", "1"].includes(text)) return "A";
   if (["E", "EMPATE", "X", "0"].includes(text)) return "E";
   if (["B", "VISITANTE", "EQUIPO_B", "2"].includes(text)) return "B";
+  return "";
+}
+
+// Normaliza la predicción "Más de 2 goles" (Over 2.5) a "S" o "N".
+function normalizeOver(value) {
+  const text = String(value ?? "").trim().toUpperCase();
+  if (["S", "SI", "SÍ", "YES", "Y", "OVER", "1", "TRUE"].includes(text)) return "S";
+  if (["N", "NO", "UNDER", "0", "FALSE"].includes(text)) return "N";
   return "";
 }
 
@@ -128,6 +137,13 @@ async function loadData() {
 function normalizeMatch(row) {
   const id = row.id || row.id_partido || row.partido_id || "";
   const fromFixture = (window.PRODE_FIXTURE || []).find((m) => m.id === id);
+  // Las cuotas pueden venir desde la hoja (cuota_a / cuota_e / cuota_b) o del fixture.js como fallback.
+  const cuotaFromSheet = (row.cuota_a !== undefined && row.cuota_a !== "")
+    || (row.cuota_e !== undefined && row.cuota_e !== "")
+    || (row.cuota_b !== undefined && row.cuota_b !== "");
+  const cuotas = cuotaFromSheet
+    ? { a: cleanNumber(row.cuota_a), e: cleanNumber(row.cuota_e), b: cleanNumber(row.cuota_b) }
+    : fromFixture?.cuotas;
   return {
     id: id,
     fase: row.fase || "Grupos",
@@ -141,7 +157,8 @@ function normalizeMatch(row) {
     ciudad: row.ciudad || row.sede || "",
     goles_a_real: cleanNumber(row.goles_a_real ?? row.goles_local),
     goles_b_real: cleanNumber(row.goles_b_real ?? row.goles_visitante),
-    cuotas: fromFixture?.cuotas        
+    mas_2_real: normalizeOver(row.mas_2_real ?? row.mas2_real ?? row.over_real ?? ""),
+    cuotas: cuotas
   };
 }
 
@@ -164,6 +181,7 @@ function normalizePrediction(row) {
     participante: row.participante || row.apodo || row.nombre || "",
     id_partido: row.id_partido || row.id || row.partido_id || "",
     prediccion: normalizeOutcome(row.prediccion || row.resultado || row.pronostico || ""),
+    pred_mas2: normalizeOver(row.pred_mas2 ?? row.mas2 ?? row.over ?? row.pred_over ?? ""),
     pred_a: cleanNumber(row.pred_a ?? row.goles_a ?? row.pron_a),
     pred_b: cleanNumber(row.pred_b ?? row.goles_b ?? row.pron_b)
   };
@@ -212,18 +230,65 @@ function formatPredictionValue(prediction, match = {}) {
   return "-";
 }
 
-function getPredictionPoints(prediction) {
+// Calcula el "Más de 2 goles" real a partir de los goles del partido.
+// Devuelve "S", "N" o "" si todavía no hay datos.
+function computeMatchOver(match) {
+  if (!match) return "";
+  if (match.mas_2_real === "S" || match.mas_2_real === "N") return match.mas_2_real;
+  const realA = match.goles_a_real, realB = match.goles_b_real;
+  if (realA === "" || realB === "") return "";
+  return (Number(realA) + Number(realB)) > 2 ? "S" : "N";
+}
+
+// Devuelve el desglose de puntos: { outcomePts, overPts, total } o "" si todavía no se jugó.
+function getPredictionPointsDetail(prediction) {
   const match = partidos.find((m) => m.id === prediction.id_partido);
   if (!match) return "";
   const realA = match.goles_a_real, realB = match.goles_b_real;
   if (realA === "" || realB === "") return "";
+
   const realOutcome = getOutcome(realA, realB);
   const predictedOutcome = getPredictionOutcome(prediction);
-  if (!predictedOutcome) return "";
-  if (!prediction.prediccion && prediction.pred_a !== "" && prediction.pred_b !== "") {
-    if (Number(realA) === Number(prediction.pred_a) && Number(realB) === Number(prediction.pred_b)) return config.scoring?.exactScore ?? 3;
+  const realOver = computeMatchOver(match);
+  const predOver = prediction.pred_mas2;
+
+  const scoring = config.scoring || {};
+  const outcomeFactor = scoring.outcomeFactor ?? 100;
+  const goalsBonus = scoring.goalsBonus ?? 100;
+  const missPts = scoring.miss ?? 0;
+
+  // Acierto 1X2: cuota del resultado real * outcomeFactor.
+  // Si no tengo la cuota cargada uso scoring.outcome (esquema legado) como fallback.
+  let outcomePts = missPts;
+  if (predictedOutcome && realOutcome && predictedOutcome === realOutcome) {
+    const cuotas = match.cuotas;
+    let cuota = null;
+    if (cuotas) {
+      if (realOutcome === "A") cuota = Number(cuotas.a);
+      else if (realOutcome === "E") cuota = Number(cuotas.e);
+      else if (realOutcome === "B") cuota = Number(cuotas.b);
+    }
+    if (Number.isFinite(cuota) && cuota > 0) {
+      outcomePts = Math.round(cuota * outcomeFactor);
+    } else {
+      outcomePts = scoring.outcome ?? 1;
+    }
   }
-  return realOutcome === predictedOutcome ? (config.scoring?.outcome ?? 1) : (config.scoring?.miss ?? 0);
+
+  // Acierto Más de 2 goles: +goalsBonus si acertó S/N.
+  let overPts = 0;
+  if (predOver && realOver && predOver === realOver) {
+    overPts = goalsBonus;
+  }
+
+  return { outcomePts, overPts, total: outcomePts + overPts };
+}
+
+// Versión que devuelve solo el total (compatibilidad con código existente).
+function getPredictionPoints(prediction) {
+  const detail = getPredictionPointsDetail(prediction);
+  if (detail === "") return "";
+  return detail.total;
 }
 
 function computeRanking() {
@@ -284,14 +349,25 @@ function setupStaticText() {
   const whatsapp = $("#whatsapp-link");
   if (isConfiguredUrl(config.whatsappUrl)) { whatsapp.href = config.whatsappUrl; whatsapp.classList.remove("hidden"); }
   const scoring = config.scoring || {};
+  const factorEl = $("#score-outcome-factor");
+  if (factorEl) factorEl.textContent = scoring.outcomeFactor ?? 100;
+  const bonusEl = $("#score-over-bonus");
+  if (bonusEl) bonusEl.textContent = scoring.goalsBonus ?? scoring.over25Bonus ?? 100;
+  // IDs legados: solo escribimos si todavía existen en el DOM.
   const scoreExact = $("#score-exact");
   if (scoreExact) scoreExact.textContent = scoring.exactScore ?? 3;
-  $("#score-outcome").textContent = scoring.outcome ?? 1;
-  $("#score-miss").textContent = scoring.miss ?? 0;
-  $("#score-champion").textContent = scoring.champion ?? 10;
-  $("#score-runner-up").textContent = scoring.runnerUp ?? 6;
-  $("#score-top-scorer").textContent = scoring.topScorer ?? 6;
-  $("#score-revelation").textContent = scoring.revelation ?? 4;
+  const scoreOutcome = $("#score-outcome");
+  if (scoreOutcome) scoreOutcome.textContent = scoring.outcome ?? 1;
+  const scoreMiss = $("#score-miss");
+  if (scoreMiss) scoreMiss.textContent = scoring.miss ?? 0;
+  const scoreChampion = $("#score-champion");
+  if (scoreChampion) scoreChampion.textContent = scoring.champion ?? 10;
+  const scoreRunnerUp = $("#score-runner-up");
+  if (scoreRunnerUp) scoreRunnerUp.textContent = scoring.runnerUp ?? 6;
+  const scoreTopScorer = $("#score-top-scorer");
+  if (scoreTopScorer) scoreTopScorer.textContent = scoring.topScorer ?? 6;
+  const scoreRevelation = $("#score-revelation");
+  if (scoreRevelation) scoreRevelation.textContent = scoring.revelation ?? 4;
   formatDeadline();
 }
 
@@ -422,10 +498,19 @@ function renderPredictions() {
     const result = match.goles_a_real !== "" && match.goles_b_real !== "" ? `${match.goles_a_real} - ${match.goles_b_real}` : "Pendiente";
     const teamA = match.equipo_a ? `${flagFor(match.equipo_a)} ${escapeHtml(match.equipo_a)}` : escapeHtml(prediction.id_partido);
     const teamB = match.equipo_b ? `${escapeHtml(match.equipo_b)} ${flagFor(match.equipo_b)}` : "";
-    return `<tr><td>${escapeHtml(prediction.participante)}</td><td>Grupo ${escapeHtml(match.grupo || "-")}</td><td>${teamA} <span class="vs-sep">vs</span> ${teamB}</td><td class="pred-score">${escapeHtml(formatPredictionValue(prediction, match))}</td><td class="pred-score">${result}</td><td>${points === "" ? "-" : points}</td></tr>`;
+    const realOver = computeMatchOver(match);
+    const overCell = formatOverCell(prediction.pred_mas2, realOver);
+    return `<tr><td>${escapeHtml(prediction.participante)}</td><td>Grupo ${escapeHtml(match.grupo || "-")}</td><td>${teamA} <span class="vs-sep">vs</span> ${teamB}</td><td class="pred-score">${escapeHtml(formatPredictionValue(prediction, match))}</td><td class="pred-score">${overCell}</td><td class="pred-score">${result}</td><td>${points === "" ? "-" : points}</td></tr>`;
   }).join("");
   empty.textContent = "Todavía no hay predicciones públicas configuradas.";
   empty.classList.toggle("hidden", rows.length > 0);
+}
+
+// Devuelve la celda "predicción / resultado" para Más de 2 goles. Ej.: "S / —" o "N / S".
+function formatOverCell(predOver, realOver) {
+  const left = predOver === "S" ? "Sí" : predOver === "N" ? "No" : "-";
+  const right = realOver === "S" ? "Sí" : realOver === "N" ? "No" : "—";
+  return `${left} / ${right}`;
 }
 
 function renderStats() {
@@ -454,34 +539,48 @@ function isDeadlineClosed() {
 
 function getSelectedPredictionValues() {
   const form = $("#prediction-form");
-  if (!form) return { ...predictionDraft };
+  if (!form) return { outcomes: { ...predictionDraft }, overs: { ...predictionOverDraft } };
   const data = new FormData(form);
   partidos.forEach((match) => {
     const value = data.get(`draft_${match.id}`);
     if (value) predictionDraft[match.id] = value;
+    const overValue = data.get(`over_${match.id}`);
+    if (overValue) predictionOverDraft[match.id] = overValue;
   });
-  return { ...predictionDraft };
+  return { outcomes: { ...predictionDraft }, overs: { ...predictionOverDraft } };
 }
 
 function updatePredictionProgress() {
   const node = $("#prediction-progress");
   if (!node) return;
-  const values = getSelectedPredictionValues();
-  const selected = Object.keys(values).length;
-  node.textContent = `${selected} de ${partidos.length} partidos seleccionados`;
+  getSelectedPredictionValues();
+  const selectedOutcomes = Object.keys(predictionDraft).length;
+  const selectedOvers = Object.keys(predictionOverDraft).length;
+  // Cada partido aporta 2 selecciones (resultado + más de 2 goles)
+  node.textContent = `${selectedOutcomes} de ${partidos.length} resultados · ${selectedOvers} de ${partidos.length} más de 2 goles`;
 }
 
 function addPredictionHiddenFields(form) {
   form.querySelectorAll(".prediction-hidden-input").forEach((input) => input.remove());
   partidos.forEach((match) => {
-    const value = predictionDraft[match.id];
-    if (!value) return;
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = `pred_${match.id}`;
-    input.value = value;
-    input.className = "prediction-hidden-input";
-    form.appendChild(input);
+    const outcomeValue = predictionDraft[match.id];
+    if (outcomeValue) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = `pred_${match.id}`;
+      input.value = outcomeValue;
+      input.className = "prediction-hidden-input";
+      form.appendChild(input);
+    }
+    const overValue = predictionOverDraft[match.id];
+    if (overValue) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = `over_${match.id}`;
+      input.value = overValue;
+      input.className = "prediction-hidden-input";
+      form.appendChild(input);
+    }
   });
 }
 
@@ -503,10 +602,16 @@ function renderPredictionForm() {
   }).join("");
 
   partidos.forEach((match) => {
-    const value = selected[match.id];
-    if (!value) return;
-    const input = list.querySelector(`input[name="draft_${match.id}"][value="${value}"]`);
-    if (input) input.checked = true;
+    const outcomeValue = selected.outcomes[match.id];
+    if (outcomeValue) {
+      const input = list.querySelector(`input[name="draft_${match.id}"][value="${outcomeValue}"]`);
+      if (input) input.checked = true;
+    }
+    const overValue = selected.overs[match.id];
+    if (overValue) {
+      const input = list.querySelector(`input[name="over_${match.id}"][value="${overValue}"]`);
+      if (input) input.checked = true;
+    }
   });
 
   updatePredictionProgress();
@@ -514,6 +619,7 @@ function renderPredictionForm() {
 
 function renderPredictionMatch(match) {
   const name = `draft_${match.id}`;
+  const overName = `over_${match.id}`;
   const cuota = match.cuotas;
   const odd = (val) => (val !== undefined && val !== null && val !== "")
     ? `<small class="opt-odd">${val}</small>`
@@ -525,6 +631,11 @@ function renderPredictionMatch(match) {
       <label><input type="radio" name="${name}" value="A" /><span><span class="opt-line">${flagFor(match.equipo_a)}<span>Gana ${escapeHtml(match.equipo_a)}</span></span>${odd(cuota?.a)}</span></label>
       <label><input type="radio" name="${name}" value="E" /><span><span class="opt-line">Empate</span>${odd(cuota?.e)}</span></label>
       <label><input type="radio" name="${name}" value="B" /><span><span class="opt-line"><span>Gana ${escapeHtml(match.equipo_b)}</span>${flagFor(match.equipo_b)}</span>${odd(cuota?.b)}</span></label>
+    </div>
+    <div class="over-options" role="radiogroup" aria-label="Más de 2 goles para ${escapeHtml(match.equipo_a)} vs ${escapeHtml(match.equipo_b)}">
+      <span class="over-options__label">Más de 2 goles</span>
+      <label><input type="radio" name="${overName}" value="S" /><span>Sí</span></label>
+      <label><input type="radio" name="${overName}" value="N" /><span>No</span></label>
     </div>
   </article>`;
 }
@@ -553,8 +664,12 @@ function setupPredictionSubmit() {
 
   form.addEventListener("change", (event) => {
     const target = event.target;
-    if (target && target.name && target.name.startsWith("draft_")) {
-      predictionDraft[target.name.replace(/^draft_/, "")] = target.value;
+    if (target && target.name) {
+      if (target.name.startsWith("draft_")) {
+        predictionDraft[target.name.replace(/^draft_/, "")] = target.value;
+      } else if (target.name.startsWith("over_")) {
+        predictionOverDraft[target.name.replace(/^over_/, "")] = target.value;
+      }
     }
     updatePredictionProgress();
   });
@@ -570,10 +685,14 @@ function setupPredictionSubmit() {
       status.textContent = "La carga de predicciones ya está cerrada.";
       return;
     }
-    if (Object.keys(predictionDraft).length !== partidos.length) {
+    const missingOutcomes = partidos.length - Object.keys(predictionDraft).length;
+    const missingOvers = partidos.length - Object.keys(predictionOverDraft).length;
+    if (missingOutcomes > 0 || missingOvers > 0) {
       event.preventDefault();
-      const missing = partidos.length - Object.keys(predictionDraft).length;
-      status.textContent = `Faltan ${missing} partidos por seleccionar.`;
+      const parts = [];
+      if (missingOutcomes > 0) parts.push(`${missingOutcomes} resultados`);
+      if (missingOvers > 0) parts.push(`${missingOvers} predicciones de Más de 2 goles`);
+      status.textContent = `Faltan ${parts.join(" y ")} por completar.`;
       return;
     }
     addPredictionHiddenFields(form);
