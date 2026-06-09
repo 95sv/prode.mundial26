@@ -117,7 +117,6 @@
         <section class="panel section-heading">
           <div>
             <h2>Eliminación directa</h2>
-            <p>Los cruces están precargados como placeholders. Cuando se conozcan los clasificados, podés reemplazarlos desde el archivo local o desde una hoja pública de Google Sheets.</p>
           </div>
         </section>
         <div class="toolbar">
@@ -130,7 +129,7 @@
 
       <section id="view-ranking" class="view">
         <section class="panel section-heading">
-          <div><h2>Ranking general</h2><p>Si no configurás una hoja de ranking, la página calcula puntos con predicciones públicas y resultados reales de la hoja de partidos.</p></div>
+          <div><h2>Ranking general</h2></div>
           <button id="refresh-ranking" class="button button--small">Actualizar datos</button>
         </section>
         <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Participante</th><th>Partidos</th><th>Extras</th><th>Total</th></tr></thead><tbody id="ranking-body"></tbody></table></div>
@@ -151,7 +150,6 @@
       <section id="view-reglas" class="view">
         <div class="rules-grid">
           <article class="panel"><h2>Reglas de puntaje</h2><ul class="rule-list"><li><strong>1X2:</strong> al acertar A / E / B sumás <strong>la cuota del resultado real × <span id="score-outcome-factor">100</span></strong> puntos (ej.: cuota 1.50 → 150 pts).</li><li><strong>Más de 2 goles:</strong> al acertar S / N sumás <strong id="score-over-bonus">100</strong> puntos extra.</li><li><strong id="score-miss">0</strong> puntos si no acierta.</li><li>Cada partido suma 1X2 + over por separado, así que un partido puede valer 0, los 100 del over, la cuota×100, o las dos cosas.</li></ul></article>
-          <article class="panel"><h2>Extras sugeridos</h2><ul class="rule-list"><li>Campeón: <strong id="score-champion">10</strong> puntos.</li><li>Subcampeón: <strong id="score-runner-up">6</strong> puntos.</li><li>Goleador: <strong id="score-top-scorer">6</strong> puntos.</li><li>Equipo revelación: <strong id="score-revelation">4</strong> puntos.</li></ul></article>
         </div>
       </section>
     </main>
