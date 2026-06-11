@@ -7,7 +7,7 @@ window.PRODE_CONFIG = {
   organizerName: "Santi",
 
 
-  deadlineIso: "2026-06-11T16:00:00-03:00",
+deadlineIso: "2026-06-11T23:59:00-03:00",
 
 
   predictionFormUrl: "#cargar-prode",
