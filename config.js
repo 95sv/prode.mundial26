@@ -1,5 +1,5 @@
 
-const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbz7h8jjn5qHK7l2uVUFOMyv8XRxAml4ILXojkZ-TIs58YliCyH_SIDoF_EPV_GcFgrQcg/exec";
+const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbzK9H4XYcgodfd8pHaFAJ6Sh4GvWiDMFkE88tBhwm7Sn5oT-zqNPTrNuKtGy4YwHE-3ZA/exec";
 
 window.PRODE_CONFIG = {
   title: "Prode Mundial 2026",
@@ -7,7 +7,7 @@ window.PRODE_CONFIG = {
   organizerName: "Santi",
 
 
-  deadlineIso: "2026-06-11T11:30:00-03:00",
+  deadlineIso: "2026-06-11T16:00:00-03:00",
 
 
   predictionFormUrl: "#cargar-prode",
