@@ -3,7 +3,6 @@ let partidos = Array.isArray(window.PRODE_FIXTURE) ? [...window.PRODE_FIXTURE] :
 let eliminatorias = Array.isArray(window.PRODE_KNOCKOUT) ? [...window.PRODE_KNOCKOUT] : [];
 let predicciones = [];
 let ranking = [];
-let extras = [];
 let predictionDraft = {};       // resultado 1X2 por id_partido (A/E/B)
 let predictionOverDraft = {};   // más de 2 goles por id_partido (S/N)
 
@@ -114,17 +113,15 @@ async function fetchCsv(url) {
 async function loadData() {
   try {
     const sheets = config.sheets || {};
-    const [sheetMatches, sheetPredictions, sheetRanking, sheetExtras, sheetKnockout] = await Promise.all([
+    const [sheetMatches, sheetPredictions, sheetRanking, sheetKnockout] = await Promise.all([
       fetchCsv(sheets.partidosCsvUrl).catch(() => []),
       fetchCsv(sheets.prediccionesCsvUrl).catch(() => []),
       fetchCsv(sheets.rankingCsvUrl).catch(() => []),
-      fetchCsv(sheets.extrasCsvUrl).catch(() => []),
       fetchCsv(sheets.eliminatoriasCsvUrl).catch(() => [])
     ]);
     if (sheetMatches.length) partidos = sheetMatches.map(normalizeMatch);
     if (sheetKnockout.length) eliminatorias = sheetKnockout.map(normalizeKnockout);
     predicciones = dedupePredictions(sheetPredictions.map(normalizePrediction).filter((p) => p.participante && p.id_partido));
-    extras = sheetExtras;
     ranking = sheetRanking.length ? sheetRanking.map(normalizeRanking).filter((r) => r.participante) : computeRanking();
     renderAll();
   } catch (error) {
@@ -132,7 +129,6 @@ async function loadData() {
     renderAll();
   }
 }
-   
 
 function normalizeMatch(row) {
   const id = row.id || row.id_partido || row.partido_id || "";
@@ -313,24 +309,6 @@ function formatDate(dateString) {
   return new Intl.DateTimeFormat("es-AR", { weekday: "short", day: "2-digit", month: "short" }).format(date);
 }
 
-function formatDeadline() {
-  const deadline = new Date(config.deadlineIso || "");
-  if (Number.isNaN(deadline.getTime())) return;
-  $("#deadline-text").textContent = new Intl.DateTimeFormat("es-AR", { dateStyle: "medium", timeStyle: "short" }).format(deadline);
-  updateCountdown();
-}
-
-function updateCountdown() {
-  const node = $("#countdown-text"), deadline = new Date(config.deadlineIso || "");
-  if (!node || Number.isNaN(deadline.getTime())) return;
-  const diff = deadline.getTime() - Date.now();
-  if (diff <= 0) { node.textContent = "Carga cerrada"; return; }
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  node.textContent = `Faltan ${days}d ${hours}h ${minutes}m`;
-}
-
 function predictionsAreVisible() {
   if (config.showPredictionsBeforeDeadline) return true;
   const deadline = new Date(config.deadlineIso || "");
@@ -343,11 +321,13 @@ function setupStaticText() {
   $("#app-subtitle").textContent = config.subtitle || "Fixture, predicciones públicas y ranking";
   $("#organizer-name").textContent = config.organizerName || "Santi";
   const formLink = $("#form-link");
-  formLink.href = isConfiguredUrl(config.predictionFormUrl) ? config.predictionFormUrl : "#cargar-prode";
-  if (config.predictionFormUrl === "#cargar-prode") formLink.removeAttribute("target");
-  if (!isConfiguredUrl(config.predictionFormUrl)) formLink.textContent = "Configurar link de carga";
+  if (formLink) {
+    formLink.href = isConfiguredUrl(config.predictionFormUrl) ? config.predictionFormUrl : "#cargar-prode";
+    if (config.predictionFormUrl === "#cargar-prode") formLink.removeAttribute("target");
+    if (!isConfiguredUrl(config.predictionFormUrl)) formLink.textContent = "Configurar link de carga";
+  }
   const whatsapp = $("#whatsapp-link");
-  if (isConfiguredUrl(config.whatsappUrl)) { whatsapp.href = config.whatsappUrl; whatsapp.classList.remove("hidden"); }
+  if (whatsapp && isConfiguredUrl(config.whatsappUrl)) { whatsapp.href = config.whatsappUrl; whatsapp.classList.remove("hidden"); }
   const scoring = config.scoring || {};
   const factorEl = $("#score-outcome-factor");
   if (factorEl) factorEl.textContent = scoring.outcomeFactor ?? 100;
@@ -368,7 +348,6 @@ function setupStaticText() {
   if (scoreTopScorer) scoreTopScorer.textContent = scoring.topScorer ?? 6;
   const scoreRevelation = $("#score-revelation");
   if (scoreRevelation) scoreRevelation.textContent = scoring.revelation ?? 4;
-  formatDeadline();
 }
 
 function activateView(view) {
@@ -379,15 +358,6 @@ function activateView(view) {
 
 function setupTabs() {
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => activateView(tab.dataset.view)));
-  const formLink = $("#form-link");
-  if (formLink) {
-    formLink.addEventListener("click", (event) => {
-      if ((config.predictionFormUrl || "") === "#cargar-prode") {
-        event.preventDefault();
-        activateView("cargar");
-      }
-    });
-  }
 }
 
 function setupFilters() {
@@ -481,7 +451,7 @@ function renderKnockout() {
 function renderRanking() {
   const body = $("#ranking-body"), empty = $("#ranking-empty");
   const sorted = [...ranking].sort((a, b) => Number(b.total) - Number(a.total) || a.participante.localeCompare(b.participante));
-  body.innerHTML = sorted.map((row, index) => `<tr><td class="rank-pos">${index + 1}</td><td>${row.participante}</td><td>${row.puntos_partidos || 0}</td><td>${row.puntos_extras || 0}</td><td><strong>${row.total || 0}</strong></td></tr>`).join("");
+  body.innerHTML = sorted.map((row, index) => `<tr><td class="rank-pos">${index + 1}</td><td>${escapeHtml(row.participante)}</td><td>${row.puntos_partidos || 0}</td><td>${row.puntos_extras || 0}</td><td><strong>${row.total || 0}</strong></td></tr>`).join("");
   empty.classList.toggle("hidden", sorted.length > 0);
 }
 
@@ -711,8 +681,55 @@ function setupPredictionSubmit() {
   }
 }
 
-function renderAll() { renderSelects(); renderStats(); renderPredictionForm(); renderFixture(); renderKnockout(); renderRanking(); renderPredictions(); }
+function renderHomeNextMatch() {
+  const container = $("#home-next-match");
+  if (!container) return;
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+  const unplayed = partidos
+    .filter((m) => m.fecha >= today && m.goles_a_real === "" && m.goles_b_real === "")
+    .sort((a, b) => {
+      const ka = a.fecha + (a.hora || "");
+      const kb = b.fecha + (b.hora || "");
+      return ka < kb ? -1 : ka > kb ? 1 : 0;
+    });
+  if (!unplayed.length) {
+    container.innerHTML = `<p class="empty-state">No hay partidos próximos.</p>`;
+    return;
+  }
+  const nextDate = unplayed[0].fecha;
+  const dayMatches = unplayed.filter((m) => m.fecha === nextDate);
+  container.innerHTML = dayMatches.map((match) => {
+    const cuota = match.cuotas;
+    const cuotasHtml = cuota ? `
+      <div class="odds-row">
+        <span class="odd"><em>1</em><strong>${cuota.a}</strong></span>
+        <span class="odd"><em>X</em><strong>${cuota.e}</strong></span>
+        <span class="odd"><em>2</em><strong>${cuota.b}</strong></span>
+      </div>` : "";
+    return `<article class="match-card home-next-match-card">
+      <div class="match-meta"><span class="group-pill">Grupo ${escapeHtml(match.grupo)}</span><span>${formatDate(match.fecha)} · ${escapeHtml(match.hora)}</span></div>
+      <div class="match-teams">${teamBlock(match.equipo_a, "a")}<span class="score-box">vs</span>${teamBlock(match.equipo_b, "b")}</div>
+      ${cuotasHtml}
+      <p class="match-location">📍 ${escapeHtml(match.ciudad)}</p>
+    </article>`;
+  }).join("");
+}
+
+function renderHomeRanking() {
+  const body = $("#home-ranking-body");
+  if (!body) return;
+  const sorted = [...ranking].sort((a, b) => Number(b.total) - Number(a.total) || a.participante.localeCompare(b.participante));
+  body.innerHTML = sorted.map((row, i) => `<tr><td class="rank-pos">${i + 1}</td><td>${escapeHtml(row.participante)}</td><td>${row.puntos_partidos || 0}</td><td>${row.puntos_extras || 0}</td><td><strong>${row.total || 0}</strong></td></tr>`).join("");
+  const empty = $("#home-ranking-empty");
+  if (empty) empty.classList.toggle("hidden", sorted.length > 0);
+}
+
+function renderAll() { renderSelects(); renderStats(); renderPredictionForm(); renderFixture(); renderKnockout(); renderRanking(); renderPredictions(); renderHomeNextMatch(); renderHomeRanking(); }
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupStaticText(); setupTabs(); setupFilters(); setupPredictionSubmit(); loadData(); setInterval(updateCountdown, 60000);
+  setupStaticText(); setupTabs(); setupFilters(); setupPredictionSubmit();
+  renderAll();
+  loadData();
 });

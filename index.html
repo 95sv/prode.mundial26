@@ -25,21 +25,15 @@
           <span class="host-chip host-chip--mex">🇲🇽 México</span>
           <span class="host-chip host-chip--usa">🇺🇸 Estados Unidos</span>
         </div>
-        <div class="hero__actions">
+        <div class="hero__actions hidden">
           <a id="form-link" class="button button--primary" href="#" target="_blank" rel="noopener">Completar mi predicción</a>
           <a id="whatsapp-link" class="button button--ghost hidden" href="#" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
-      <aside class="status-card" aria-label="Estado del prode">
-        <span class="status-card__label">Cierre de carga</span>
-        <strong id="deadline-text">Configurá la fecha de cierre</strong>
-        <span id="countdown-text" class="status-card__meta">-</span>
-      </aside>
     </header>
 
     <nav class="tabs" aria-label="Secciones del prode">
       <button class="tab is-active" data-view="inicio">Inicio</button>
-      <button class="tab" data-view="cargar">Cargar predicción</button>
       <button class="tab" data-view="fixture">Fixture</button>
       <button class="tab" data-view="eliminatorias">Eliminatorias</button>
       <button class="tab" data-view="ranking">Ranking</button>
@@ -54,17 +48,15 @@
           <article class="metric-card"><span>Participantes</span><strong id="stat-players">0</strong></article>
           <article class="metric-card"><span>Predicciones visibles</span><strong id="stat-predictions">0</strong></article>
         </div>
-        <section class="panel intro-panel">
-          <div>
-            <h2>Cómo participar</h2>
-            <p>Entrá al link de carga, completá tus resultados de fase de grupos y enviá tu prode antes del cierre. Después se habilitan las predicciones públicas para que todos puedan ver qué puso cada participante.</p>
-          </div>
-          <ol class="steps">
-            <li><span>1</span> Cargá tu predicción</li>
-            <li><span>2</span> Esperá el cierre</li>
-            <li><span>3</span> Seguí ranking y resultados</li>
-          </ol>
+        <section class="panel section-heading">
+          <div><h2>Próximo partido</h2></div>
         </section>
+        <div id="home-next-match" class="match-grid"></div>
+        <section class="panel section-heading home-ranking-heading">
+          <div><h2>Ranking</h2></div>
+        </section>
+        <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Participante</th><th>Partidos</th><th>Extras</th><th>Total</th></tr></thead><tbody id="home-ranking-body"></tbody></table></div>
+        <p id="home-ranking-empty" class="empty-state">Todavía no hay ranking disponible.</p>
       </section>
 
       <section id="view-cargar" class="view">
@@ -160,6 +152,6 @@
   <script src="data/fixture.js"></script>
   <script src="data/eliminatorias.js"></script>
   <script src="data/banderas.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

@@ -79,7 +79,7 @@ body::after {
 
 .hero {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr;
   gap: 18px;
   margin-bottom: 22px;
 }
@@ -984,4 +984,13 @@ tbody tr:last-child td { border-bottom: 0; }
     text-align: center;
   }
 }
+
+/* ============================== HOME PAGE ============================== */
+
+#home-next-match { margin-bottom: 26px; }
+
+.home-next-match-card { border-color: var(--gold-line); }
+.home-next-match-card::before { background: linear-gradient(90deg, var(--gold-bright), var(--gold), transparent); opacity: 1; }
+
+.home-ranking-heading { margin-top: 6px; }
 
