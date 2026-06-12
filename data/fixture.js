@@ -1,4 +1,4 @@
-// Fixture generado desde la lista provista por Santi.
+// Fixture con horarios en horario argentino (ART, UTC-3).
 window.PRODE_FIXTURE = [
   {
     "id": "GA01",
@@ -7,13 +7,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-11",
     "fecha_texto": "Jueves, 11 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "México",
     "equipo_b": "Sudáfrica",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 } 
+    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 }
   },
   {
     "id": "GA02",
@@ -22,13 +22,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-11",
     "fecha_texto": "Jueves, 11 de junio",
-    "hora": "19:00",
+    "hora": "23:00",
     "equipo_a": "Rep. de Corea",
     "equipo_b": "R. Checa",
     "ciudad": "Guadalajara",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 2.55, "e": 3.2, "b": 2.6 } 
+    "cuotas": { "a": 2.55, "e": 3.2, "b": 2.6 }
   },
   {
     "id": "GB01",
@@ -37,13 +37,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-12",
     "fecha_texto": "Viernes, 12 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Canadá",
     "equipo_b": "Bosnia-Herz.",
     "ciudad": "Toronto",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.8, "b": 3.8 } 
+    "cuotas": { "a": 1.75, "e": 3.8, "b": 3.8 }
   },
   {
     "id": "GD01",
@@ -52,13 +52,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-12",
     "fecha_texto": "Viernes, 12 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Estados Unidos",
     "equipo_b": "Paraguay",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 } 
+    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 }
   },
   {
     "id": "GB02",
@@ -67,7 +67,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-13",
     "fecha_texto": "Sábado, 13 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Catar",
     "equipo_b": "Suiza",
     "ciudad": "San Francisco",
@@ -82,7 +82,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-13",
     "fecha_texto": "Sábado, 13 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Brasil",
     "equipo_b": "Marruecos",
     "ciudad": "New York",
@@ -97,7 +97,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-13",
     "fecha_texto": "Sábado, 13 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Haití",
     "equipo_b": "Escocia",
     "ciudad": "Boston",
@@ -110,9 +110,9 @@ window.PRODE_FIXTURE = [
     "fase": "Grupos",
     "grupo": "D",
     "fecha_num": 1,
-    "fecha": "2026-06-13",
-    "fecha_texto": "Sábado, 13 de junio",
-    "hora": "21:00",
+    "fecha": "2026-06-14",
+    "fecha_texto": "Domingo, 14 de junio",
+    "hora": "01:00",
     "equipo_a": "Australia",
     "equipo_b": "Turquía",
     "ciudad": "Vancouver",
@@ -127,7 +127,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-14",
     "fecha_texto": "Domingo, 14 de junio",
-    "hora": "10:00",
+    "hora": "14:00",
     "equipo_a": "Alemania",
     "equipo_b": "Curazao",
     "ciudad": "Houston",
@@ -142,13 +142,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-14",
     "fecha_texto": "Domingo, 14 de junio",
-    "hora": "13:00",
+    "hora": "17:00",
     "equipo_a": "Países Bajos",
     "equipo_b": "Japón",
     "ciudad": "Dallas",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.95, "e": 3.6, "b": 3.33 } 
+    "cuotas": { "a": 1.95, "e": 3.6, "b": 3.33 }
   },
   {
     "id": "GE02",
@@ -157,7 +157,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-14",
     "fecha_texto": "Domingo, 14 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Costa de Marfil",
     "equipo_b": "Ecuador",
     "ciudad": "Philadelphia",
@@ -172,13 +172,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-14",
     "fecha_texto": "Domingo, 14 de junio",
-    "hora": "19:00",
+    "hora": "23:00",
     "equipo_a": "Suecia",
     "equipo_b": "Túnez",
     "ciudad": "Monterrey",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7} 
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GG01",
@@ -187,7 +187,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-15",
     "fecha_texto": "Lunes, 15 de junio",
-    "hora": "09:00",
+    "hora": "13:00",
     "equipo_a": "España",
     "equipo_b": "Cabo Verde",
     "ciudad": "Atlanta",
@@ -202,7 +202,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-15",
     "fecha_texto": "Lunes, 15 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Bélgica",
     "equipo_b": "Egipto",
     "ciudad": "Seattle",
@@ -217,7 +217,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-15",
     "fecha_texto": "Lunes, 15 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Arabia Saudita",
     "equipo_b": "Uruguay",
     "ciudad": "Miami",
@@ -232,7 +232,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-15",
     "fecha_texto": "Lunes, 15 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "RI de Irán",
     "equipo_b": "Nueva Zelanda",
     "ciudad": "Los Angeles",
@@ -247,7 +247,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-16",
     "fecha_texto": "Martes, 16 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Francia",
     "equipo_b": "Senegal",
     "ciudad": "New York",
@@ -262,7 +262,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-16",
     "fecha_texto": "Martes, 16 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Irak",
     "equipo_b": "Noruega",
     "ciudad": "Boston",
@@ -277,7 +277,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-16",
     "fecha_texto": "Martes, 16 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Argentina",
     "equipo_b": "Argelia",
     "ciudad": "Kansas City",
@@ -290,9 +290,9 @@ window.PRODE_FIXTURE = [
     "fase": "Grupos",
     "grupo": "J",
     "fecha_num": 1,
-    "fecha": "2026-06-16",
-    "fecha_texto": "Martes, 16 de junio",
-    "hora": "21:00",
+    "fecha": "2026-06-17",
+    "fecha_texto": "Miércoles, 17 de junio",
+    "hora": "01:00",
     "equipo_a": "Austria",
     "equipo_b": "Jordania",
     "ciudad": "San Francisco",
@@ -307,7 +307,7 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-17",
     "fecha_texto": "Miércoles, 17 de junio",
-    "hora": "10:00",
+    "hora": "14:00",
     "equipo_a": "Portugal",
     "equipo_b": "Congo",
     "ciudad": "Houston",
@@ -322,13 +322,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-17",
     "fecha_texto": "Miércoles, 17 de junio",
-    "hora": "13:00",
+    "hora": "17:00",
     "equipo_a": "Inglaterra",
     "equipo_b": "Croacia",
     "ciudad": "Dallas",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GL01",
@@ -337,13 +337,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-17",
     "fecha_texto": "Miércoles, 17 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Ghana",
     "equipo_b": "Panamá",
     "ciudad": "Toronto",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GL02",
@@ -352,13 +352,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 1,
     "fecha": "2026-06-17",
     "fecha_texto": "Miércoles, 17 de junio",
-    "hora": "19:00",
+    "hora": "23:00",
     "equipo_a": "Uzbekistán",
     "equipo_b": "Colombia",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }
   },
   {
     "id": "GA03",
@@ -367,13 +367,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-18",
     "fecha_texto": "Jueves, 18 de junio",
-    "hora": "09:00",
+    "hora": "13:00",
     "equipo_a": "R. Checa",
     "equipo_b": "Sudáfrica",
     "ciudad": "Atlanta",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GB03",
@@ -382,13 +382,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-18",
     "fecha_texto": "Jueves, 18 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Suiza",
     "equipo_b": "Bosnia-Herz.",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GB04",
@@ -397,13 +397,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-18",
     "fecha_texto": "Jueves, 18 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Canadá",
     "equipo_b": "Catar",
     "ciudad": "Vancouver",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GA04",
@@ -412,13 +412,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-18",
     "fecha_texto": "Jueves, 18 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "México",
     "equipo_b": "Rep. de Corea",
     "ciudad": "Guadalajara",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 } 
+    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 }
   },
   {
     "id": "GD03",
@@ -427,13 +427,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-19",
     "fecha_texto": "Viernes, 19 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Estados Unidos",
     "equipo_b": "Australia",
     "ciudad": "Seattle",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 } 
+    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 }
   },
   {
     "id": "GC03",
@@ -442,13 +442,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-19",
     "fecha_texto": "Viernes, 19 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Escocia",
     "equipo_b": "Marruecos",
     "ciudad": "Boston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 } 
+    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 }
   },
   {
     "id": "GC04",
@@ -457,28 +457,28 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-19",
     "fecha_texto": "Viernes, 19 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Brasil",
     "equipo_b": "Haití",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 } 
+    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 }
   },
   {
     "id": "GD04",
     "fase": "Grupos",
     "grupo": "D",
     "fecha_num": 2,
-    "fecha": "2026-06-19",
-    "fecha_texto": "Viernes, 19 de junio",
-    "hora": "21:00",
+    "fecha": "2026-06-20",
+    "fecha_texto": "Sábado, 20 de junio",
+    "hora": "01:00",
     "equipo_a": "Turquía",
     "equipo_b": "Paraguay",
     "ciudad": "San Francisco",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 } 
+    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 }
   },
   {
     "id": "GF03",
@@ -487,13 +487,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-20",
     "fecha_texto": "Sábado, 20 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Japón",
     "equipo_b": "Túnez",
     "ciudad": "Toronto",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7}  
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GE03",
@@ -502,13 +502,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-20",
     "fecha_texto": "Sábado, 20 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Curazao",
     "equipo_b": "Ecuador",
     "ciudad": "Houston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 } 
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 }
   },
   {
     "id": "GE04",
@@ -517,28 +517,28 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-20",
     "fecha_texto": "Sábado, 20 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Alemania",
     "equipo_b": "Costa de Marfil",
     "ciudad": "Dallas",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.04, "e": 15, "b": 41 } 
+    "cuotas": { "a": 1.04, "e": 15, "b": 41 }
   },
   {
     "id": "GF04",
     "fase": "Grupos",
     "grupo": "F",
     "fecha_num": 2,
-    "fecha": "2026-06-20",
-    "fecha_texto": "Sábado, 20 de junio",
-    "hora": "21:00",
+    "fecha": "2026-06-21",
+    "fecha_texto": "Domingo, 21 de junio",
+    "hora": "01:00",
     "equipo_a": "Países Bajos",
     "equipo_b": "Suecia",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.95, "e": 3.6, "b": 3.33 }  
+    "cuotas": { "a": 1.95, "e": 3.6, "b": 3.33 }
   },
   {
     "id": "GH03",
@@ -547,13 +547,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-21",
     "fecha_texto": "Domingo, 21 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Uruguay",
     "equipo_b": "RI de Irán",
     "ciudad": "Boston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GG03",
@@ -562,13 +562,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-21",
     "fecha_texto": "Domingo, 21 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Cabo Verde",
     "equipo_b": "Egipto",
     "ciudad": "New York",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 } 
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GH04",
@@ -577,22 +577,22 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-21",
     "fecha_texto": "Domingo, 21 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Arabia Saudita",
     "equipo_b": "Nueva Zelanda",
     "ciudad": "Kansas City",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }
   },
   {
     "id": "GG04",
     "fase": "Grupos",
     "grupo": "G",
     "fecha_num": 2,
-    "fecha": "2026-06-21",
-    "fecha_texto": "Domingo, 21 de junio",
-    "hora": "21:00",
+    "fecha": "2026-06-22",
+    "fecha_texto": "Lunes, 22 de junio",
+    "hora": "01:00",
     "equipo_a": "España",
     "equipo_b": "Bélgica",
     "ciudad": "Seattle",
@@ -607,13 +607,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-22",
     "fecha_texto": "Lunes, 22 de junio",
-    "hora": "14:00",
+    "hora": "18:00",
     "equipo_a": "Argentina",
     "equipo_b": "Austria",
     "ciudad": "Dallas",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }  
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }
   },
   {
     "id": "GI03",
@@ -622,13 +622,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-22",
     "fecha_texto": "Lunes, 22 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Senegal",
     "equipo_b": "Noruega",
     "ciudad": "Toronto",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 2.55, "e": 3.2, "b": 2.6 } 
+    "cuotas": { "a": 2.55, "e": 3.2, "b": 2.6 }
   },
   {
     "id": "GJ04",
@@ -637,28 +637,28 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-22",
     "fecha_texto": "Lunes, 22 de junio",
-    "hora": "19:00",
+    "hora": "23:00",
     "equipo_a": "Argelia",
     "equipo_b": "Jordania",
     "ciudad": "Monterrey",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GI04",
     "fase": "Grupos",
     "grupo": "I",
     "fecha_num": 2,
-    "fecha": "2026-06-22",
-    "fecha_texto": "Lunes, 22 de junio",
-    "hora": "22:00",
+    "fecha": "2026-06-23",
+    "fecha_texto": "Martes, 23 de junio",
+    "hora": "02:00",
     "equipo_a": "Francia",
     "equipo_b": "Irak",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }  
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }
   },
   {
     "id": "GK03",
@@ -667,13 +667,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-23",
     "fecha_texto": "Martes, 23 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Croacia",
     "equipo_b": "Congo",
     "ciudad": "Vancouver",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GL03",
@@ -682,13 +682,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-23",
     "fecha_texto": "Martes, 23 de junio",
-    "hora": "15:00",
+    "hora": "19:00",
     "equipo_a": "Colombia",
     "equipo_b": "Panamá",
     "ciudad": "San Francisco",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GK04",
@@ -697,28 +697,28 @@ window.PRODE_FIXTURE = [
     "fecha_num": 2,
     "fecha": "2026-06-23",
     "fecha_texto": "Martes, 23 de junio",
-    "hora": "18:00",
+    "hora": "22:00",
     "equipo_a": "Portugal",
     "equipo_b": "Inglaterra",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GL04",
     "fase": "Grupos",
     "grupo": "L",
     "fecha_num": 2,
-    "fecha": "2026-06-23",
-    "fecha_texto": "Martes, 23 de junio",
-    "hora": "21:00",
+    "fecha": "2026-06-24",
+    "fecha_texto": "Miércoles, 24 de junio",
+    "hora": "01:00",
     "equipo_a": "Uzbekistán",
     "equipo_b": "Ghana",
     "ciudad": "Seattle",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }
   },
   {
     "id": "GB05",
@@ -727,13 +727,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-24",
     "fecha_texto": "Miércoles, 24 de junio",
-    "hora": "13:00",
+    "hora": "17:00",
     "equipo_a": "Suiza",
     "equipo_b": "Canadá",
     "ciudad": "Toronto",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GB06",
@@ -742,13 +742,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-24",
     "fecha_texto": "Miércoles, 24 de junio",
-    "hora": "13:00",
+    "hora": "17:00",
     "equipo_a": "Bosnia-Herz.",
     "equipo_b": "Catar",
     "ciudad": "Vancouver",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GA05",
@@ -757,13 +757,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-24",
     "fecha_texto": "Miércoles, 24 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Sudáfrica",
     "equipo_b": "Rep. de Corea",
     "ciudad": "New York",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GA06",
@@ -772,13 +772,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-24",
     "fecha_texto": "Miércoles, 24 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "México",
     "equipo_b": "R. Checa",
     "ciudad": "Boston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 } 
+    "cuotas": { "a": 1.5, "e": 4.1, "b": 5.75 }
   },
   {
     "id": "GD05",
@@ -787,13 +787,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-25",
     "fecha_texto": "Jueves, 25 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Paraguay",
     "equipo_b": "Australia",
     "ciudad": "Houston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 } 
+    "cuotas": { "a": 4, "e": 3.7, "b": 1.75 }
   },
   {
     "id": "GD06",
@@ -802,13 +802,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-25",
     "fecha_texto": "Jueves, 25 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Estados Unidos",
     "equipo_b": "Turquía",
     "ciudad": "Dallas",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 } 
+    "cuotas": { "a": 1.95, "e": 3.4, "b": 3.6 }
   },
   {
     "id": "GC05",
@@ -817,13 +817,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-25",
     "fecha_texto": "Jueves, 25 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Marruecos",
     "equipo_b": "Haití",
     "ciudad": "Atlanta",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 } 
+    "cuotas": { "a": 5.75, "e": 4.75, "b": 1.42 }
   },
   {
     "id": "GC06",
@@ -832,13 +832,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-25",
     "fecha_texto": "Jueves, 25 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Brasil",
     "equipo_b": "Escocia",
     "ciudad": "Seattle",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 } 
+    "cuotas": { "a": 1.57, "e": 3.88, "b": 5.25 }
   },
   {
     "id": "GF05",
@@ -847,13 +847,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-26",
     "fecha_texto": "Viernes, 26 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Suecia",
     "equipo_b": "Japón",
     "ciudad": "Miami",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7}  
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GF06",
@@ -862,13 +862,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-26",
     "fecha_texto": "Viernes, 26 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Túnez",
     "equipo_b": "Países Bajos",
     "ciudad": "San Francisco",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7}  
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GE05",
@@ -877,13 +877,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-26",
     "fecha_texto": "Viernes, 26 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Ecuador",
     "equipo_b": "Alemania",
     "ciudad": "Kansas City",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 } 
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 }
   },
   {
     "id": "GE06",
@@ -892,13 +892,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-26",
     "fecha_texto": "Viernes, 26 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Curazao",
     "equipo_b": "Costa de Marfil",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 } 
+    "cuotas": { "a": 3, "e": 3.2, "b": 2.25 }
   },
   {
     "id": "GH05",
@@ -907,13 +907,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-27",
     "fecha_texto": "Sábado, 27 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Nueva Zelanda",
     "equipo_b": "Uruguay",
     "ciudad": "Toronto",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 } 
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }
   },
   {
     "id": "GH06",
@@ -922,13 +922,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-27",
     "fecha_texto": "Sábado, 27 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "RI de Irán",
     "equipo_b": "Arabia Saudita",
     "ciudad": "Vancouver",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }   
+    "cuotas": { "a": 4.5, "e": 3.5, "b": 1.75 }
   },
   {
     "id": "GG05",
@@ -937,13 +937,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-27",
     "fecha_texto": "Sábado, 27 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Egipto",
     "equipo_b": "España",
     "ciudad": "Monterrey",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 } 
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GG06",
@@ -952,13 +952,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-27",
     "fecha_texto": "Sábado, 27 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Cabo Verde",
     "equipo_b": "Bélgica",
     "ciudad": "Ciudad de México",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 } 
+    "cuotas": { "a": 1.85, "e": 3.5, "b": 3.7 }
   },
   {
     "id": "GJ05",
@@ -967,13 +967,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-28",
     "fecha_texto": "Domingo, 28 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Argelia",
     "equipo_b": "Austria",
     "ciudad": "New York",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GJ06",
@@ -982,13 +982,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-28",
     "fecha_texto": "Domingo, 28 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Jordania",
     "equipo_b": "Argentina",
     "ciudad": "Boston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GI05",
@@ -997,13 +997,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-28",
     "fecha_texto": "Domingo, 28 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Noruega",
     "equipo_b": "Francia",
     "ciudad": "Los Angeles",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }  
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }
   },
   {
     "id": "GI06",
@@ -1012,13 +1012,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-28",
     "fecha_texto": "Domingo, 28 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Irak",
     "equipo_b": "Senegal",
     "ciudad": "Seattle",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }    
+    "cuotas": { "a": 1.25, "e": 5.5, "b": 10 }
   },
   {
     "id": "GL05",
@@ -1027,13 +1027,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-29",
     "fecha_texto": "Lunes, 29 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Panamá",
     "equipo_b": "Uzbekistán",
     "ciudad": "Houston",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 2.5, "e": 3.5, "b": 2.25 }   
+    "cuotas": { "a": 2.5, "e": 3.5, "b": 2.25 }
   },
   {
     "id": "GL06",
@@ -1042,13 +1042,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-29",
     "fecha_texto": "Lunes, 29 de junio",
-    "hora": "12:00",
+    "hora": "16:00",
     "equipo_a": "Colombia",
     "equipo_b": "Ghana",
     "ciudad": "Dallas",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   },
   {
     "id": "GK05",
@@ -1057,13 +1057,13 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-29",
     "fecha_texto": "Lunes, 29 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Congo",
     "equipo_b": "Portugal",
     "ciudad": "Atlanta",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.09, "e": 13, "b": 21 } 
+    "cuotas": { "a": 1.09, "e": 13, "b": 21 }
   },
   {
     "id": "GK06",
@@ -1072,12 +1072,12 @@ window.PRODE_FIXTURE = [
     "fecha_num": 3,
     "fecha": "2026-06-29",
     "fecha_texto": "Lunes, 29 de junio",
-    "hora": "16:00",
+    "hora": "20:00",
     "equipo_a": "Croacia",
     "equipo_b": "Inglaterra",
     "ciudad": "Philadelphia",
     "goles_a_real": "",
     "goles_b_real": "",
-    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 } 
+    "cuotas": { "a": 1.75, "e": 3.5, "b": 4.5 }
   }
 ];
