@@ -3,40 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prode Mundial 2026</title>
-  <meta name="description" content="Prode Mundial 2026: fixture, predicciones públicas y ranking." />
-  <meta property="og:title" content="Prode Mundial 2026" />
-  <meta property="og:description" content="Participá del prode, revisá el fixture y seguí el ranking." />
+  <title>Prode Mundial 26</title>
+  <meta name="description" content="Prode Mundial 26: ranking en vivo, próximos partidos y fixture del Mundial Canadá · México · Estados Unidos." />
+  <meta property="og:title" content="Prode Mundial 26" />
+  <meta property="og:description" content="Seguí el ranking y los próximos partidos del prode." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="page-shell">
     <header class="hero">
       <div class="hero__content">
-        <p class="eyebrow">We Are 26 · FIFA World Cup</p>
-        <h1 id="app-title">Prode <span class="accent">Mundial 26</span></h1>
-        <p id="app-subtitle" class="hero__subtitle">Fixture, predicciones públicas y ranking en vivo del Mundial Canadá · México · Estados Unidos 2026.</p>
-        <div class="hero__hosts" aria-label="Países anfitriones">
-          <span class="host-chip host-chip--can">🇨🇦 Canadá</span>
-          <span class="host-chip host-chip--mex">🇲🇽 México</span>
-          <span class="host-chip host-chip--usa">🇺🇸 Estados Unidos</span>
-        </div>
-        <div class="hero__actions hidden">
-          <a id="form-link" class="button button--primary" href="#" target="_blank" rel="noopener">Completar mi predicción</a>
-          <a id="whatsapp-link" class="button button--ghost hidden" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <div class="hero__burst" aria-hidden="true"></div>
+        <div class="hero__mark" aria-hidden="true">26</div>
+        <div class="hero__inner">
+          <p class="eyebrow"><span class="tri" aria-hidden="true"><i></i><i></i><i></i></span> Mundial 2026 · Canadá · México · EE.UU.</p>
+          <h1 id="app-title">Prode <span class="accent">26</span></h1>
+          <p id="app-subtitle" class="hero__subtitle">Seguí el ranking en vivo y los próximos partidos del Mundial Canadá · México · Estados Unidos 2026.</p>
+          <div class="hero__hosts" aria-label="Países anfitriones">
+            <span class="host-chip host-chip--can">Canadá</span>
+            <span class="host-chip host-chip--mex">México</span>
+            <span class="host-chip host-chip--usa">Estados Unidos</span>
+          </div>
+          <div class="hero__actions hidden">
+            <a id="form-link" class="button button--primary" href="#" target="_blank" rel="noopener">Completar mi predicción</a>
+            <a id="whatsapp-link" class="button button--ghost hidden" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
         </div>
       </div>
     </header>
 
     <nav class="tabs" aria-label="Secciones del prode">
       <button class="tab is-active" data-view="inicio">Inicio</button>
+      <button class="tab" data-view="ranking">Ranking</button>
       <button class="tab" data-view="fixture">Fixture</button>
       <button class="tab" data-view="eliminatorias">Eliminatorias</button>
-      <button class="tab" data-view="ranking">Ranking</button>
       <button class="tab" data-view="predicciones">Predicciones</button>
       <button class="tab" data-view="reglas">Reglas</button>
     </nav>
@@ -49,7 +53,7 @@
           <article class="metric-card"><span>Predicciones visibles</span><strong id="stat-predictions">0</strong></article>
         </div>
         <section class="panel section-heading">
-          <div><h2>Próximo partido</h2></div>
+          <div><h2>Próximos partidos</h2></div>
         </section>
         <div id="home-next-match" class="match-grid"></div>
         <section class="panel section-heading home-ranking-heading">
@@ -59,42 +63,13 @@
         <p id="home-ranking-empty" class="empty-state">Todavía no hay ranking disponible.</p>
       </section>
 
-      <section id="view-cargar" class="view">
-        <section id="cargar-prode" class="panel section-heading prediction-heading">
-          <div>
-            <h2>Cargar predicción</h2>
-            <p>Para cada partido elegí dos cosas: <strong>quién gana (o si empatan)</strong> y si vas a tener <strong>más de 2 goles</strong> en el partido (sí o no).</p>
-          </div>
-          <span class="submission-badge" id="submission-mode-badge">Carga desde la web</span>
+      <section id="view-ranking" class="view">
+        <section class="panel section-heading">
+          <div><h2>Ranking general</h2></div>
+          <button id="refresh-ranking" class="button button--small">Actualizar datos</button>
         </section>
-        <form id="prediction-form" class="prediction-form" method="post" target="prediction-submit-frame">
-          <input type="hidden" name="tipo" value="prediccion" />
-          <input type="hidden" name="version" value="prode-cuotas-v1" />
-          <section class="form-panel">
-            <div class="form-grid">
-              <label class="form-label">Nombre o apodo
-                <input id="participant-name" name="participante" type="text" placeholder="Ej: Santi" required maxlength="60" autocomplete="name" />
-              </label>
-              <label class="form-label">WhatsApp o contacto
-                <input id="participant-contact" name="whatsapp" type="text" placeholder="Opcional, para identificar tu prode" maxlength="80" autocomplete="tel" />
-              </label>
-            </div>
-            <p class="form-help">El nombre/apodo es el que va a aparecer en la tabla pública después del cierre.</p>
-          </section>
-          <div class="form-tools">
-            <label>Filtrar grupo<select id="prediction-form-group-filter"></select></label>
-            <label>Buscar partido<input id="prediction-form-search" type="search" placeholder="Argentina, México, Grupo A..." /></label>
-          </div>
-          <div id="prediction-form-list" class="prediction-form-list"></div>
-          <section class="form-submit-bar">
-            <div>
-              <strong id="prediction-progress">0 de 72 resultados · 0 de 72 más de 2 goles</strong>
-              <p id="prediction-form-status">Completá todos los partidos antes de enviar.</p>
-            </div>
-            <button id="prediction-submit-button" class="button button--primary" type="submit">Enviar predicción</button>
-          </section>
-        </form>
-        <iframe id="prediction-submit-frame" name="prediction-submit-frame" class="hidden" title="Estado de envío"></iframe>
+        <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Participante</th><th>Partidos</th><th>Extras</th><th>Total</th></tr></thead><tbody id="ranking-body"></tbody></table></div>
+        <p id="ranking-empty" class="empty-state">Todavía no hay ranking público configurado.</p>
       </section>
 
       <section id="view-fixture" class="view">
@@ -119,15 +94,6 @@
         <p id="knockout-empty" class="empty-state hidden">Todavía no hay cruces de eliminación directa configurados.</p>
       </section>
 
-      <section id="view-ranking" class="view">
-        <section class="panel section-heading">
-          <div><h2>Ranking general</h2></div>
-          <button id="refresh-ranking" class="button button--small">Actualizar datos</button>
-        </section>
-        <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Participante</th><th>Partidos</th><th>Extras</th><th>Total</th></tr></thead><tbody id="ranking-body"></tbody></table></div>
-        <p id="ranking-empty" class="empty-state">Todavía no hay ranking público configurado.</p>
-      </section>
-
       <section id="view-predicciones" class="view">
         <section class="panel section-heading"><div><h2>Predicciones públicas</h2><p id="predictions-visibility-note">Las predicciones se muestran después del cierre para evitar copias.</p></div></section>
         <div class="toolbar toolbar--predictions">
@@ -148,6 +114,38 @@
   </div>
 
   <footer class="site-footer"><span>Prode organizado por <strong id="organizer-name">Santi</strong></span><span>Datos desde Google Sheets</span></footer>
+  <script>
+    // Realce visual (no toca la lógica): colorea cada tarjeta por grupo
+    // leyendo el texto del pill ("Grupo A" -> data-grupo="A"), y marca
+    // las tarjetas de eliminación directa para su color dorado.
+    (function () {
+      function stampCard(card) {
+        var pill = card.querySelector('.group-pill');
+        if (!pill) return;
+        if (pill.classList.contains('knockout-pill')) {
+          card.setAttribute('data-knockout', '1');
+          return;
+        }
+        var m = pill.textContent.match(/([A-La-l])\s*$/);
+        if (m) card.setAttribute('data-grupo', m[1].toUpperCase());
+      }
+      function paint(root) {
+        (root || document).querySelectorAll('.match-card').forEach(stampCard);
+      }
+      var targets = ['#fixture-list', '#home-next-match', '#knockout-list'];
+      function observe() {
+        targets.forEach(function (sel) {
+          var el = document.querySelector(sel);
+          if (!el) return;
+          paint(el);
+          new MutationObserver(function () { paint(el); }).observe(el, { childList: true });
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', observe);
+      } else { observe(); }
+    })();
+  </script>
   <script src="config.js"></script>
   <script src="data/fixture.js?v=2"></script>
   <script src="data/eliminatorias.js"></script>

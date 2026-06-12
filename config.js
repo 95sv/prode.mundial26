@@ -2,8 +2,8 @@
 const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbzK9H4XYcgodfd8pHaFAJ6Sh4GvWiDMFkE88tBhwm7Sn5oT-zqNPTrNuKtGy4YwHE-3ZA/exec";
 
 window.PRODE_CONFIG = {
-  title: "Prode Mundial 2026",
-  subtitle: "Fixture, predicciones públicas y ranking en vivo",
+  title: "Prode 26",
+  subtitle: "Seguí el ranking en vivo y los próximos partidos del Mundial Canadá · México · Estados Unidos 2026.",
   organizerName: "Santi",
 
 
