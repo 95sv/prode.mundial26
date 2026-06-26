@@ -113,16 +113,18 @@ async function fetchCsv(url) {
 async function loadData() {
   try {
     const sheets = config.sheets || {};
-    const [sheetMatches, sheetPredictions, sheetRanking, sheetKnockout] = await Promise.all([
+    const [sheetMatches, sheetPredictions, sheetRanking, sheetKnockout, sheetDraft] = await Promise.all([
       fetchCsv(sheets.partidosCsvUrl).catch(() => []),
       fetchCsv(sheets.prediccionesCsvUrl).catch(() => []),
       fetchCsv(sheets.rankingCsvUrl).catch(() => []),
-      fetchCsv(sheets.eliminatoriasCsvUrl).catch(() => [])
+      fetchCsv(sheets.eliminatoriasCsvUrl).catch(() => []),
+      fetchCsv(sheets.draftCsvUrl).catch(() => [])
     ]);
     if (sheetMatches.length) partidos = sheetMatches.map(normalizeMatch);
     if (sheetKnockout.length) eliminatorias = sheetKnockout.map(normalizeKnockout);
     predicciones = dedupePredictions(sheetPredictions.map(normalizePrediction).filter((p) => p.participante && p.id_partido));
     ranking = sheetRanking.length ? sheetRanking.map(normalizeRanking).filter((r) => r.participante) : computeRanking();
+    if (sheetDraft.length) loadDraftFromSheet(sheetDraft);
     renderAll();
   } catch (error) {
     console.error(error);
@@ -726,7 +728,139 @@ function renderHomeRanking() {
   if (empty) empty.classList.toggle("hidden", sorted.length > 0);
 }
 
-function renderAll() { renderSelects(); renderStats(); renderPredictionForm(); renderFixture(); renderKnockout(); renderRanking(); renderPredictions(); renderHomeNextMatch(); renderHomeRanking(); }
+// ============================================================
+// FASE FINAL — Draft System
+// ============================================================
+const QUALIFIED_TEAMS = [
+  "Argentina", "Brasil", "Francia", "Alemania", "España", "Inglaterra",
+  "Italia", "Países Bajos", "Portugal", "Bélgica", "Croacia", "Japón",
+  "México", "Estados Unidos", "Canadá", "Colombia", "Uruguay", "Ecuador",
+  "Senegal", "Marruecos", "Nigeria", "Ghana", "Corea del Sur", "Australia",
+  "Serbia", "Suiza", "Polonia", "Dinamarca", "Suecia", "Austria", "República Checa", "Escocia"
+];
+
+let draftState = {
+  active: false,
+  currentPick: 1,
+  selections: [],
+  availableTeams: [...QUALIFIED_TEAMS]
+};
+
+function loadDraftFromSheet(sheetDraft) {
+  draftState.selections = [];
+  draftState.availableTeams = [...QUALIFIED_TEAMS];
+  
+  sheetDraft.forEach(row => {
+    const position = cleanNumber(row.posicion);
+    const player = row.participante || "";
+    const team = row.seleccion || "";
+    
+    if (position && player && team) {
+      draftState.selections.push({ position, player, team });
+      draftState.availableTeams = draftState.availableTeams.filter(t => t !== team);
+    }
+  });
+  
+  draftState.selections.sort((a, b) => a.position - b.position);
+  draftState.currentPick = draftState.selections.length + 1;
+  draftState.active = draftState.currentPick <= 32 && draftState.selections.length < 32;
+}
+
+function renderDraft() {
+  renderDraftStatus();
+  renderDraftRanking();
+  renderDraftCountries();
+  renderDraftSelections();
+}
+
+function renderDraftStatus() {
+  const statusEl = $("#draft-status");
+  if (!statusEl) return;
+  if (draftState.active) {
+    statusEl.textContent = `Draft activo — Turno del puesto #${draftState.currentPick}`;
+    statusEl.style.background = "rgba(31, 203, 107, 0.2)";
+  } else {
+    statusEl.textContent = "El draft comenzará cuando finalicen los 72 partidos de grupos.";
+    statusEl.style.background = "rgba(31, 203, 107, 0.1)";
+  }
+}
+
+function renderDraftRanking() {
+  const listEl = $("#draft-ranking-list");
+  if (!listEl) return;
+  if (!ranking.length) {
+    listEl.innerHTML = '<p class="empty-state">El ranking se calculará automáticamente una vez finalizada la fase de grupos.</p>';
+    return;
+  }
+  const top32 = ranking.slice(0, 32);
+  listEl.innerHTML = top32.map((player, index) => {
+    const position = index + 1;
+    const isTop3 = position <= 3;
+    const selectedTeam = draftState.selections.find(s => s.position === position);
+    return `
+      <div class="draft-rank-item${selectedTeam ? ' selected' : ''}">
+        <div class="draft-rank-position${isTop3 ? ' top-3' : ''}">${position}</div>
+        <div class="draft-rank-name">${escapeHtml(player.participante)}</div>
+        <div class="draft-rank-points">${player.total || 0} pts</div>
+        ${selectedTeam ? `<div class="draft-country-status">✓ ${selectedTeam.team}</div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function renderDraftCountries() {
+  const listEl = $("#draft-countries-list");
+  if (!listEl) return;
+  if (!draftState.active) {
+    listEl.innerHTML = '<p class="empty-state">Las selecciones se mostrarán una vez que comience el draft.</p>';
+    return;
+  }
+  listEl.innerHTML = draftState.availableTeams.map(team => {
+    const isSelected = draftState.selections.some(s => s.team === team);
+    return `
+      <div class="draft-country-item${isSelected ? ' selected' : ''}" data-team="${escapeHtml(team)}">
+        <div class="draft-country-flag">⚽</div>
+        <div class="draft-country-name">${escapeHtml(team)}</div>
+        <div class="draft-country-status">${isSelected ? 'Seleccionado' : 'Disponible'}</div>
+      </div>`;
+  }).join('');
+}
+
+function renderDraftSelections() {
+  const listEl = $("#draft-selections-list");
+  if (!listEl) return;
+  if (!draftState.selections.length) {
+    listEl.innerHTML = '<p class="empty-state">Aún no se han realizado selecciones.</p>';
+    return;
+  }
+  listEl.innerHTML = draftState.selections.map(sel => `
+    <div class="draft-selection-item">
+      <div class="draft-selection-position">#${sel.position}</div>
+      <div class="draft-selection-player">${escapeHtml(sel.player)}</div>
+      <div class="draft-selection-country">${escapeHtml(sel.team)}</div>
+    </div>`).join('');
+}
+
+function initDraft() {
+  draftState.active = true;
+  draftState.currentPick = 1;
+  draftState.selections = [];
+  draftState.availableTeams = [...QUALIFIED_TEAMS];
+  renderDraft();
+}
+
+function makeDraftPick(position, player, team) {
+  if (!draftState.active) return false;
+  if (position !== draftState.currentPick) return false;
+  if (!draftState.availableTeams.includes(team)) return false;
+  draftState.selections.push({ position, player, team });
+  draftState.availableTeams = draftState.availableTeams.filter(t => t !== team);
+  draftState.currentPick++;
+  if (draftState.currentPick > 32) draftState.active = false;
+  renderDraft();
+  return true;
+}
+
+function renderAll() { renderSelects(); renderStats(); renderPredictionForm(); renderFixture(); renderKnockout(); renderRanking(); renderPredictions(); renderHomeNextMatch(); renderHomeRanking(); renderDraft(); }
 
 document.addEventListener("DOMContentLoaded", () => {
   setupStaticText(); setupTabs(); setupFilters(); setupPredictionSubmit();

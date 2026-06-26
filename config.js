@@ -1,5 +1,5 @@
 
-const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbzK9H4XYcgodfd8pHaFAJ6Sh4GvWiDMFkE88tBhwm7Sn5oT-zqNPTrNuKtGy4YwHE-3ZA/exec";
+const PRODE_API_URL = "https://script.google.com/macros/s/AKfycbwRKXQ4AOGisMLSykCedBmlMrUCPwNQDtKl2K6HlrEb9cTIMkP_-ekIlH_RJCl33qlwFw/exec";
 
 window.PRODE_CONFIG = {
   title: "Prode 26",
@@ -32,7 +32,8 @@ deadlineIso: "2026-06-11T23:59:00-03:00",
     prediccionesCsvUrl: PRODE_API_URL + "?view=predicciones",
     rankingCsvUrl: PRODE_API_URL + "?view=ranking",
     extrasCsvUrl: PRODE_API_URL + "?view=extras",
-    eliminatoriasCsvUrl: PRODE_API_URL + "?view=eliminatorias"
+    eliminatoriasCsvUrl: PRODE_API_URL + "?view=eliminatorias",
+    draftCsvUrl: PRODE_API_URL + "?view=draft"
   },
 
   showPredictionsBeforeDeadline: true

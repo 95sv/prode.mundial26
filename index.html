@@ -41,6 +41,7 @@
       <button class="tab" data-view="ranking">Ranking</button>
       <button class="tab" data-view="fixture">Fixture</button>
       <button class="tab" data-view="eliminatorias">Eliminatorias</button>
+      <button class="tab" data-view="fase-final">Fase Final</button>
       <button class="tab" data-view="predicciones">Predicciones</button>
       <button class="tab" data-view="reglas">Reglas</button>
     </nav>
@@ -92,6 +93,76 @@
         </div>
         <div id="knockout-list" class="match-grid"></div>
         <p id="knockout-empty" class="empty-state hidden">Todavía no hay cruces de eliminación directa configurados.</p>
+      </section>
+
+      <section id="view-fase-final" class="view">
+        <section class="panel section-heading">
+          <div>
+            <h2>FASE FINAL</h2>
+            <p>Una vez finalizados los 72 partidos de grupos, los 32 participantes mejor ubicados pasan a la siguiente etapa.</p>
+          </div>
+        </section>
+
+        <div class="fase-final-content">
+          <section class="panel fase-final-rules">
+            <div class="fase-final-rule">
+              <div class="fase-final-rule-icon">🏆</div>
+              <div class="fase-final-rule-text">
+                <h3>Draft de Selecciones</h3>
+                <p>Ubicados por su puntuación del <strong>1er al 32avo</strong> puesto, los jugadores ahora harán una predicción simple y contundente: <strong>elegir al campeón</strong>.</p>
+              </div>
+            </div>
+            <div class="fase-final-rule">
+              <div class="fase-final-rule-icon">⚡</div>
+              <div class="fase-final-rule-text">
+                <h3>Orden de Elección</h3>
+                <p>El primero en hacer su elección será el ganador de la primera fase, que elegirá una de las 32 selecciones que continúen en la copa del mundo. Si esa selección gana la copa, ese jugador también ganará el <strong>millón</strong>.</p>
+              </div>
+            </div>
+            <div class="fase-final-rule">
+              <div class="fase-final-rule-icon">🎯</div>
+              <div class="fase-final-rule-text">
+                <h3>Sistema de Selección</h3>
+                <p>De la misma manera el jugador ubicado en segunda posición hará su predicción pero quedando anulada la selección que eligió previamente el mejor ubicado. Sucesivamente irán eligiendo los jugadores desde el puesto <strong>3 hasta el 32</strong> su equipo favorito.</p>
+              </div>
+            </div>
+            <div class="fase-final-rule">
+              <div class="fase-final-rule-icon">🌍</div>
+              <div class="fase-final-rule-text">
+                <h3>Cada Jugador es un País</h3>
+                <p>De ahí en adelante queda solo palpitari la competencia. Cada jugador representará a un país en busca del premio mayor, el segundo y el tercer puesto.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel draft-section">
+            <h3>Draft en Vivo</h3>
+            <p class="draft-status" id="draft-status">El draft comenzará cuando finalicen los 72 partidos de grupos.</p>
+            
+            <div class="draft-container">
+              <div class="draft-ranking">
+                <h4>Orden de Selección</h4>
+                <div id="draft-ranking-list" class="draft-ranking-list">
+                  <p class="empty-state">El ranking se calculará automáticamente una vez finalizada la fase de grupos.</p>
+                </div>
+              </div>
+              
+              <div class="draft-countries">
+                <h4>Selecciones Disponibles</h4>
+                <div id="draft-countries-list" class="draft-countries-list">
+                  <p class="empty-state">Las selecciones se mostrarán una vez que comience el draft.</p>
+                </div>
+              </div>
+              
+              <div class="draft-selections">
+                <h4>Selecciones Realizadas</h4>
+                <div id="draft-selections-list" class="draft-selections-list">
+                  <p class="empty-state">Aún no se han realizado selecciones.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </section>
 
       <section id="view-predicciones" class="view">
