@@ -689,20 +689,30 @@ function renderHomeNextMatch() {
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
-  const unplayed = partidos
+  const unplayedGroups = partidos
     .filter((m) => m.fecha >= today && m.goles_a_real === "" && m.goles_b_real === "")
-    .sort((a, b) => {
-      const ka = a.fecha + (a.hora || "");
-      const kb = b.fecha + (b.hora || "");
-      return ka < kb ? -1 : ka > kb ? 1 : 0;
-    });
-  if (!unplayed.length) {
+    .map(m => ({ ...m, _src: "grupo" }));
+
+  const unplayedKnockout = eliminatorias
+    .filter((m) => m.fecha && m.fecha >= today && m.goles_a_real === "" && m.goles_b_real === "")
+    .map(m => ({ ...m, _src: "eliminatoria" }));
+
+  const all = [...unplayedGroups, ...unplayedKnockout].sort((a, b) => {
+    const ka = a.fecha + (a.hora || "");
+    const kb = b.fecha + (b.hora || "");
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
+
+  if (!all.length) {
     container.innerHTML = `<p class="empty-state">No hay partidos próximos.</p>`;
     return;
   }
-  const nextDate = unplayed[0].fecha;
-  const dayMatches = unplayed.filter((m) => m.fecha === nextDate);
+  const nextDate = all[0].fecha;
+  const dayMatches = all.filter((m) => m.fecha === nextDate);
   container.innerHTML = dayMatches.map((match) => {
+    const isKnockout = match._src === "eliminatoria";
+    const pillClass = isKnockout ? "group-pill knockout-pill" : "group-pill";
+    const pillText = isKnockout ? escapeHtml(match.fase) : `Grupo ${escapeHtml(match.grupo)}`;
     const cuota = match.cuotas;
     const cuotasHtml = cuota ? `
       <div class="odds-row">
@@ -711,10 +721,10 @@ function renderHomeNextMatch() {
         <span class="odd"><em>2</em><strong>${cuota.b}</strong></span>
       </div>` : "";
     return `<article class="match-card home-next-match-card">
-      <div class="match-meta"><span class="group-pill">Grupo ${escapeHtml(match.grupo)}</span><span>${formatDate(match.fecha)} · ${escapeHtml(match.hora)}</span></div>
+      <div class="match-meta"><span class="${pillClass}">${pillText}</span><span>${formatDate(match.fecha)} · ${escapeHtml(match.hora)}</span></div>
       <div class="match-teams">${teamBlock(match.equipo_a, "a")}<span class="score-box">vs</span>${teamBlock(match.equipo_b, "b")}</div>
       ${cuotasHtml}
-      <p class="match-location">📍 ${escapeHtml(match.ciudad)}</p>
+      ${match.ciudad ? `<p class="match-location">📍 ${escapeHtml(match.ciudad)}</p>` : ""}
     </article>`;
   }).join("");
 }
