@@ -862,13 +862,13 @@ function makeDraftPick(position, player, team) {
 
 // Bracket — Llaves de eliminación
 const BRACKET_ROUNDS = [
-  { title: "Dieciseisavos", ids: ["R32-01","R32-02","R32-03","R32-04","R32-05","R32-06","R32-07","R32-08","R32-09","R32-10","R32-11","R32-12","R32-13","R32-14","R32-15","R32-16"] },
-  { title: "Octavos", ids: ["R16-01","R16-02","R16-03","R16-04","R16-05","R16-06","R16-07","R16-08"] },
-  { title: "Cuartos", ids: ["QF-01","QF-02","QF-03","QF-04"] },
-  { title: "Semifinal", ids: ["SF-01","SF-02"] },
-  { title: "Final", ids: ["F-01"], isFinal: true },
+  { title: "Dieciseisavos", ids: ["D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","D14","D15","D16"] },
+  { title: "Octavos", ids: ["O01","O02","O03","O04","O05","O06","O07","O08"] },
+  { title: "Cuartos", ids: ["C01","C02","C03","C04"] },
+  { title: "Semifinal", ids: ["S01","S02"] },
+  { title: "Final", ids: ["F01"], isFinal: true },
 ];
-const BRACKET_THIRD = { title: "3er Puesto", ids: ["TP-01"] };
+const BRACKET_THIRD = { title: "3er Puesto", ids: ["TP01"] };
 
 function bracketMatchHtml(match) {
   if (!match) return `<div class="bracket-match"><div class="bracket-match-team bracket-match-placeholder">Por definir</div></div>`;
