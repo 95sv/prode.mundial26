@@ -860,7 +860,48 @@ function makeDraftPick(position, player, team) {
   return true;
 }
 
-function renderAll() { renderSelects(); renderStats(); renderPredictionForm(); renderFixture(); renderKnockout(); renderRanking(); renderPredictions(); renderHomeNextMatch(); renderHomeRanking(); renderDraft(); }
+// Bracket — Llaves de eliminación
+const BRACKET_ROUNDS = [
+  { title: "Dieciseisavos", ids: ["R32-01","R32-02","R32-03","R32-04","R32-05","R32-06","R32-07","R32-08","R32-09","R32-10","R32-11","R32-12","R32-13","R32-14","R32-15","R32-16"] },
+  { title: "Octavos", ids: ["R16-01","R16-02","R16-03","R16-04","R16-05","R16-06","R16-07","R16-08"] },
+  { title: "Cuartos", ids: ["QF-01","QF-02","QF-03","QF-04"] },
+  { title: "Semifinal", ids: ["SF-01","SF-02"] },
+  { title: "Final", ids: ["F-01"], isFinal: true },
+];
+const BRACKET_THIRD = { title: "3er Puesto", ids: ["TP-01"] };
+
+function bracketMatchHtml(match) {
+  if (!match) return `<div class="bracket-match"><div class="bracket-match-team bracket-match-placeholder">Por definir</div></div>`;
+  const a = match.equipo_a || "Por definir";
+  const b = match.equipo_b || "Por definir";
+  const hasResult = match.goles_a_real !== "" && match.goles_a_real !== undefined && match.goles_a_real !== null && match.goles_b_real !== "" && match.goles_b_real !== undefined && match.goles_b_real !== null;
+  const winnerA = hasResult && Number(match.goles_a_real) > Number(match.goles_b_real);
+  const winnerB = hasResult && Number(match.goles_b_real) > Number(match.goles_a_real);
+  return `<div class="bracket-match">
+    <div class="bracket-match-team${winnerA ? " is-winner" : ""}">${flagFor(a)}<span>${escapeHtml(a)}</span>${hasResult ? `<span class="bracket-match-score">${match.goles_a_real}</span>` : ""}</div>
+    <div class="bracket-match-team${winnerB ? " is-winner" : ""}">${flagFor(b)}<span>${escapeHtml(b)}</span>${hasResult ? `<span class="bracket-match-score">${match.goles_b_real}</span>` : ""}</div>
+  </div>`;
+}
+
+function renderBracket() {
+  const container = $("#home-bracket");
+  if (!container) return;
+  if (!eliminatorias.length) { container.innerHTML = '<p class="empty-state">Las llaves se mostrarán cuando estén configuradas las eliminatorias.</p>'; return; }
+  const byId = {};
+  eliminatorias.forEach(m => { byId[m.id] = m; });
+  let html = "";
+  BRACKET_ROUNDS.forEach(round => {
+    const isFinal = round.isFinal;
+    html += `<div class="bracket-round${isFinal ? " bracket-final-round" : ""}"><div class="bracket-round-title">${round.title}</div>`;
+    round.ids.forEach(id => { html += bracketMatchHtml(byId[id]); });
+    html += "</div>";
+  });
+  const tpMatch = byId[BRACKET_THIRD.ids[0]];
+  html += `<div class="bracket-round"><div class="bracket-round-title">${BRACKET_THIRD.title}</div>${bracketMatchHtml(tpMatch)}</div>`;
+  container.innerHTML = html;
+}
+
+function renderAll() { renderSelects(); renderStats(); renderPredictionForm(); renderFixture(); renderKnockout(); renderRanking(); renderPredictions(); renderHomeNextMatch(); renderHomeRanking(); renderDraft(); renderBracket(); }
 
 document.addEventListener("DOMContentLoaded", () => {
   setupStaticText(); setupTabs(); setupFilters(); setupPredictionSubmit();

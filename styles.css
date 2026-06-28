@@ -885,6 +885,99 @@ td:last-child strong { font-weight: 900; color: var(--cyan); }
   .over-options__label { grid-column: 1 / -1; text-align: center; }
 }
 
+/* Bracket — Llaves de eliminación */
+.bracket-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  padding: 20px 0;
+  scrollbar-width: thin;
+}
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-width: 180px;
+  padding: 0 8px;
+  position: relative;
+}
+.bracket-round::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(255,255,255,0.08);
+}
+.bracket-round:last-child::after { display: none; }
+.bracket-round-title {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.bracket-match {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 4px 0;
+  background: var(--surface-2);
+  font-size: 0.8rem;
+  min-height: 52px;
+}
+.bracket-match-team {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: var(--ink-muted);
+}
+.bracket-match-team:last-child { border-bottom: none; }
+.bracket-match-team.is-winner {
+  color: var(--ink-strong);
+  background: rgba(31,203,107,0.1);
+}
+.bracket-match-team .team__flag {
+  width: 20px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.bracket-match-team .team__flag img {
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+.bracket-match-score {
+  margin-left: auto;
+  font-weight: 800;
+  color: var(--ink-strong);
+  font-size: 0.78rem;
+}
+.bracket-match-placeholder {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+.bracket-final-round .bracket-match {
+  border-color: var(--yellow);
+}
+.bracket-final-round .bracket-round-title {
+  color: var(--yellow);
+}
+@media (max-width: 860px) {
+  .bracket-round { min-width: 150px; }
+}
+
 /* ============================================================
    FASE FINAL — Draft System
    ============================================================ */
@@ -938,7 +1031,7 @@ td:last-child strong { font-weight: 900; color: var(--cyan); }
 
 .draft-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
